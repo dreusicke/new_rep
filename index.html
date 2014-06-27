@@ -51,8 +51,9 @@ p {
 
 .circle {
  stroke: #fff7ac;
+/* stroke-width: 10;*/
  stroke-opacity: 0.3;
- fill-opacity: 0.3;
+ fill-opacity: 0.7;
 /*  toDo: make circles clickable/hoverable*/
  z-index: 10000000;
  position: absolute;
@@ -147,21 +148,22 @@ var map = new google.maps.Map(document.getElementById('map'), {
 var importFunction3 = d3.dsv(";","text/csv");
 
 //  Load the station data. When the data comes back, create an overlay.
-importFunction3("schoenhauser_test_01.csv", function(data) {
+importFunction3("schoenhauser_allee.csv", function(data) {
 //    console.log(data);
 
  //  CREATE COLOR SCALE FOR DATAPOINTS
 
  var height_min = d3.min(data, function(d) {                 
-     return d.height;
+     return d.energy_consumption;
+     console.log(d.energy_consumption);
      });
  var height_max = d3.max(data, function(d) {
-     return d.height;
+     return d.energy_consumption;
      });
 
  var height_scale = d3.scale.linear()
      .domain([height_min,height_max])
-     .range(["#ff5800","#f9ff9a"]);
+     .range(["#ffbf00","#ff4e00"]);
 
 
 
@@ -197,13 +199,15 @@ importFunction3("schoenhauser_test_01.csv", function(data) {
 
      // Add a circle.
      marker.append("svg:circle")
-//          .attr("r", function(d) {return d.height*1.1;})
-         .attr("r", 10)
+         .attr("r", function(d) {return d.lumen/10000+3;})
+//         .attr("r", 5)
          .attr("cx", padding)
          .attr("cy", padding)
          .attr("class", "circle")
          .on("mouseover", function(){console.log("mouseover circle")}) // toDo: make markers clickable
-         .style("fill", function(d) {return height_scale(d.height);});
+         .style("fill", function(d) {return height_scale(d.energy_consumption);})
+         .style("stroke-width", function(d) {return d.lumen/10000+6;})
+         .style("stroke", function(d) {return height_scale(d.energy_consumption);});
 
      // Add a label.
      marker.append("svg:text")
@@ -261,7 +265,7 @@ importFunction3("schoenhauser_test_01.csv", function(data) {
 var importFunction2 = d3.dsv(";","text/csv");
 
 //  Load the station data. When the data comes back, create an overlay.
-importFunction2("prenzlauer_test_01.csv", function(data) {
+importFunction2("prenzlauer_allee.csv", function(data) {
 //    console.log(data);
 
  //  CREATE COLOR SCALE FOR DATAPOINTS
@@ -379,11 +383,8 @@ importFunction1("traffic_fake02.csv", function(data) {
      console.log(data);
      console.log(data[3]);
      console.log(data.length);
-     console.log(data.join(" - "));
      console.log(data[3].cars);
 //      console.log(data.cars);
-     for (int
-     var cars = [];
      
 
  };
