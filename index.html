@@ -87,21 +87,44 @@
 
 			#tooltip {
 				position: absolute;
+				font-family: sans-serif;
+				font-size: 12px;
+				font-weight: 100;
+				line-height: 130%;
+				color: #fff;
+				-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+				filter: alpha(opacity=70);
+				-moz-opacity: 0.7;
+				-khtml-opacity: 0.7;
+				opacity: 0.7;
+				-webkit-transition: opacity 1.15s ease-in-out;
+				-moz-transition: opacity 1.15s ease-in-out;
+				-ms-transition: opacity 1.15s ease-in-out;
+				-o-transition: opacity 1.15s ease-in-out;
+				transition: opacity 1.15s ease-in-out;
 				right: 10px;
 				z-index: 1000;
 				margin-top: 50px;
 				width: auto;
 				height: auto;
 				padding: 10px;
-				background-color: #777;
+				background-color: #000;
+				border: 1px solid  #777;
 				-webkit-border-radius: 5px;
 				-moz-border-radius: 5px;
 				border-radius: 5px;
-				-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); pointer-events: none;
+				-webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				-moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+				pointer-events: none;
 			}
 
 			#tooltip.hidden {
-				display: none;
+				-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+				filter: alpha(opacity=0);
+				-moz-opacity: 0;
+				-khtml-opacity: 0;
+				opacity: 0;
 			}
 
 			#tooltip p { margin: 0;
@@ -111,6 +134,32 @@
 				line-height: 130%;
 				color: #ccc;
 			}
+
+			table {
+				background-color: #111;
+				text-align: left;
+			}
+
+			.thead {
+				background-color: #000;
+				text-align: center;
+				font-size: 1.5em;
+				font-weight: 100;
+				padding: .5em 0 .7em 0;
+			}
+
+			.td_name {
+				text-align: left;
+				border-bottom: 1px dotted #888;
+				padding-right: .5em;
+			}
+
+			.td_data {
+				text-align: left;
+				border-bottom: 1px dotted #888;
+				padding-left: .5em;
+			}
+
 			.marker{
 				background-color: #ff0000;
 			}
@@ -133,21 +182,21 @@
 			<div id="tooltip" class="hidden">
 				<p class="infobox">
 				<table>
-					<thead>Details for lamp</thead>
 					<tbody>
-						<tr><td>Number</td><td><span id="number">Text vor Update</span></td></tr>
-						<tr><td>Street number</td><td><span id="street_number">Text vor Update</span></td></tr>
-						<tr><td>Light amount</td><td><span id="light_amount">Text vor Update</span></td></tr>
+						<tr><td class="thead" colspan="2">Details for lamp</td></tr>
+						<tr><td class="td_name">Number</td><td class="td_data"><span id="number">Text vor Update</span></td></tr>
+						<tr><td class="td_name">Street number</td><td class="td_data"><span id="street_number">Text vor Update</span></td></tr>
+						<tr><td class="td_name">Light amount</td><td class="td_data"><span id="light_amount">Text vor Update</span></td></tr>
 						<!--					 		<tr><td>Lamp name</td><td><span id="lamp">Text vor Update</span></td></tr>-->
-						<tr><td>Installation date</td><td><span id="installed">Text vor Update</span></td></tr>
-						<tr><td>Bulb</td><td><span id="bulb">Text vor Update</span></td></tr>
-						<tr><td>Watt</td><td><span id="watt">Text vor Update</span></td></tr>
-						<tr><td>Energy consumption</td><td><span id="energy_consumption">Text vor Update</span></td></tr>
-						<tr><td>Lifespan</td><td><span id="lifespan">Text vor Update</span></td></tr>
-						<tr><td>Lumen</td><td><span id="lumen">Text vor Update</span></td></tr>
-						<tr><td>Lumen per Watt</td><td><span id="lumen_per_watt">Text vor Update</span></td></tr>
-						<tr><td>Energy efficiency</td><td><span id="energy_efficiency">Text vor Update</span></td></tr>
-						<tr><td>Height</td><td><span id="height">Text vor Update</span></td></tr>
+						<tr><td class="td_name">Installation date</td><td class="td_data"><span id="installed">Text vor Update</span></td></tr>
+						<tr><td class="td_name">Bulb</td><td class="td_data"><span id="bulb">Text vor Update</span></td></tr>
+						<tr><td class="td_name">Watt</td><td class="td_data"><span id="watt">Text vor Update</span></td></tr>
+						<tr><td class="td_name">Energy consumption</td><td class="td_data"><span id="energy_consumption">Text vor Update</span></td></tr>
+						<tr><td class="td_name">Lifespan</td><td class="td_data"><span id="lifespan">Text vor Update</span></td></tr>
+						<tr><td class="td_name">Lumen</td><td class="td_data"><span id="lumen">Text vor Update</span></td></tr>
+						<tr><td class="td_name">Lumen per Watt</td><td class="td_data"><span id="lumen_per_watt">Text vor Update</span></td></tr>
+						<tr><td class="td_name">Energy efficiency</td><td class="td_data"><span id="energy_efficiency">Text vor Update</span></td></tr>
+						<tr><td class="td_name">Height</td><td class="td_data"><span id="height">Text vor Update</span></td></tr>
 					</tbody>
 				</table>
 
@@ -277,25 +326,19 @@
 				//              .select("#value")
 				//              .text(d.name_lamp);
 				//            d3.select("#tooltip").classed("hidden", false);
-				//     
-				//     
-				//               
-				//
-				//         
-				//         
-				//         
-				//         
+
 				//            console.log("mouseover kommt an!")
 				//         })
 
 
-				.on("mouseover", function(d) {      
-					tooltip.transition().duration(200).style("opacity", .9);      
-					tooltip.html(d)  
-					.style("left", (d3.event.pageX) + "px")     
-					.style("top", (d3.event.pageY - 28) + "px");    
-					d3.select("#tooltip")
-					.select("#number").text(d.number);
+				.on("mouseover", function(d) {
+					tooltip.html(d)
+					.style("left", (d3.event.pageX) + "px")
+					.style("top", (d3.event.pageY - 28) + "px")
+					.style("color", "red")
+					.style("text-anchor", "left");
+
+					d3.select("#tooltip").select("#number").text(d.number)
 					d3.select("#tooltip").select("#street_number").text(d.street_number)
 					d3.select("#tooltip").select("#light_amount").text(d.light_amount)
 					//						d3.select("#tooltip").select("#lamp").text(d.lamp)
@@ -308,15 +351,14 @@
 					d3.select("#tooltip").select("#lumen_per_watt").text(d.lumen_per_watt + " lm/W")
 					d3.select("#tooltip").select("#energy_efficiency").text(d.energy_efficiency)
 					d3.select("#tooltip").select("#height").text(d.height + " m")
-					d3.select("#tooltip").classed("hidden", false);
-				})                  
+					d3.select("#tooltip").style("opacity", .9).transition().duration(100)
+				})
 
+				.on("mouseout", function() {
+					d3.select("#tooltip").style("opacity", 0).transition().duration(500)
+					d3.select("#tooltip").classed("hidden", true);
+				})
 
-
-
-
-
-				//         .on("mouseover", function(){"div"}) // toDo: make markers clickable
 				.style("fill", function(d) {return height_scale(d.energy_consumption);})
 				.style("stroke-width", function(d) {return d.lumen/10000+6;})
 				.style("stroke", function(d) {return height_scale(d.energy_consumption);});
