@@ -163,6 +163,7 @@
 
 			.marker{
 				background-color: #ff0000;
+				fill: red;
 				padding: 30px;
 			}
 
@@ -185,20 +186,17 @@
 				<p class="infobox">
 				<table>
 					<tbody>
-						<tr><td class="thead" colspan="2">Details for lamp</td></tr>
-						<tr><td class="td_name">Number</td><td class="td_data"><span id="number">dummie</span></td></tr>
-						<tr><td class="td_name">Street number</td><td class="td_data"><span id="street_number">dummie</span></td></tr>
-						<tr><td class="td_name">Light amount</td><td class="td_data"><span id="light_amount">dummie</span></td></tr>
-						<!--					 		<tr><td>Lamp name</td><td><span id="lamp">dummie</span></td></tr>-->
+						<tr><td class="thead" colspan="2">Details for street light</td></tr>
+						<tr><td class="td_name">Name of the lamp</td><td class="td_data"><span id="name_lamp">dummie</span></td></tr>
 						<tr><td class="td_name">Installation date</td><td class="td_data"><span id="installed">dummie</span></td></tr>
 						<tr><td class="td_name">Bulb</td><td class="td_data"><span id="bulb">dummie</span></td></tr>
-						<tr><td class="td_name">Watt</td><td class="td_data"><span id="watt">dummie</span></td></tr>
+						<tr><td class="td_name">Type of bulb</td><td class="td_data"><span id="type_bulb">dummie</span></td></tr>
+						<tr><td class="td_name">Power output in Watt</td><td class="td_data"><span id="watt">dummie</span></td></tr>
 						<tr><td class="td_name">Energy consumption</td><td class="td_data"><span id="energy_consumption">dummie</span></td></tr>
-						<tr><td class="td_name">Lifespan</td><td class="td_data"><span id="lifespan">dummie</span></td></tr>
-						<tr><td class="td_name">Lumen</td><td class="td_data"><span id="lumen">dummie</span></td></tr>
-						<tr><td class="td_name">Lumen per Watt</td><td class="td_data"><span id="lumen_per_watt">dummie</span></td></tr>
-						<tr><td class="td_name">Energy efficiency</td><td class="td_data"><span id="energy_efficiency">dummie</span></td></tr>
-						<tr><td class="td_name">Height</td><td class="td_data"><span id="height">dummie</span></td></tr>
+						<tr><td class="td_name">Light output in Lumen</td><td class="td_data"><span id="lumen">dummie</span></td></tr>
+						<tr><td class="td_name">Energy efficiency</td><td class="td_data"><span id="lumen_per_watt">dummie</span></td></tr>
+						<tr><td class="td_name">Efficiency class</td><td class="td_data"><span id="energy_efficiency">dummie</span></td></tr>
+						<tr><td class="td_name">Powered</td><td class="td_data"><span id="powered">dummie</span></td></tr>
 					</tbody>
 				</table>
 
@@ -324,19 +322,16 @@
 					.style("color", "red")
 					.style("text-anchor", "left")
 
-					d3.select("#tooltip").select("#number").text(d.number)
-					d3.select("#tooltip").select("#street_number").text(d.street_number)
-					d3.select("#tooltip").select("#light_amount").text(d.light_amount)
-					//						d3.select("#tooltip").select("#lamp").text(d.lamp)
+					d3.select("#tooltip").select("#name_lamp").text(d.name_lamp)
 					d3.select("#tooltip").select("#installed").text(d.installed)
 					d3.select("#tooltip").select("#bulb").text(d.bulb)
+					d3.select("#tooltip").select("#type_bulb").text("Natrium vapor discharge lamp")
 					d3.select("#tooltip").select("#watt").text(d.watt + " W")
 					d3.select("#tooltip").select("#energy_consumption").text(d.energy_consumption + " kWh")
-					d3.select("#tooltip").select("#lifespan").text(d.lifespan + " h")
 					d3.select("#tooltip").select("#lumen").text(d.lumen + " lm")
-					d3.select("#tooltip").select("#lumen_per_watt").text(d.lumen_per_watt + " lm/W")
+					d3.select("#tooltip").select("#lumen_per_watt").text(d.lumen/d.watt + " lm/W")
 					d3.select("#tooltip").select("#energy_efficiency").text(d.energy_efficiency)
-					d3.select("#tooltip").select("#height").text(d.height + " m")
+					d3.select("#tooltip").select("#powered").text("From 9.46pm to 4.34am")
 					d3.select("#tooltip").style("opacity", .9).transition().duration(100);
 				})
 
@@ -360,19 +355,16 @@
 					.style("color", "red")
 					.style("text-anchor", "left")
 
-					d3.select("#tooltip").select("#number").text(d.number)
-					d3.select("#tooltip").select("#street_number").text(d.street_number)
-					d3.select("#tooltip").select("#light_amount").text(d.light_amount)
-					//						d3.select("#tooltip").select("#lamp").text(d.lamp)
+					d3.select("#tooltip").select("#name_lamp").text(d.name_lamp)
 					d3.select("#tooltip").select("#installed").text(d.installed)
 					d3.select("#tooltip").select("#bulb").text(d.bulb)
+					d3.select("#tooltip").select("#type_bulb").text("Natrium vapor discharge lamp")
 					d3.select("#tooltip").select("#watt").text(d.watt + " W")
 					d3.select("#tooltip").select("#energy_consumption").text(d.energy_consumption + " kWh")
-					d3.select("#tooltip").select("#lifespan").text(d.lifespan + " h")
 					d3.select("#tooltip").select("#lumen").text(d.lumen + " lm")
-					d3.select("#tooltip").select("#lumen_per_watt").text(d.lumen_per_watt + " lm/W")
+					d3.select("#tooltip").select("#lumen_per_watt").text(d.lumen/d.watt + " lm/W")
 					d3.select("#tooltip").select("#energy_efficiency").text(d.energy_efficiency)
-					d3.select("#tooltip").select("#height").text(d.height + " m")
+					d3.select("#tooltip").select("#powered").text("From 9.46pm to 4.34am")
 					d3.select("#tooltip").style("opacity", .9).transition().duration(100);
 				})
 
