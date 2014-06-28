@@ -258,17 +258,17 @@
 
 		//  CREATE COLOR SCALE FOR DATAPOINTS
 
-		var height_min = d3.min(data, function(d) {                 
-			return d.energy_consumption;
-			console.log(d.energy_consumption);
+		var height_min = d3.min(data, function(d) {
+			return d.lumen/d.watt;
+			console.log(d.lumen/d.watt);
 		});
 		var height_max = d3.max(data, function(d) {
-			return d.energy_consumption;
+			return d.lumen/d.watt;
 		});
 
 		var height_scale = d3.scale.linear()
 		.domain([height_min,height_max])
-		.range(["#ffbf00","#ff4e00"]);
+		.range(["#ff0000","#FFD700"]);
 
 
 
@@ -359,9 +359,9 @@
 					d3.select("#tooltip").classed("hidden", true);
 				})
 
-				.style("fill", function(d) {return height_scale(d.energy_consumption);})
+				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
 				.style("stroke-width", function(d) {return d.lumen/10000+6;})
-				.style("stroke", function(d) {return height_scale(d.energy_consumption);});
+				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);});
 
 				// Add a label.
 				marker.append("svg:text")
@@ -425,16 +425,16 @@
 		//  CREATE COLOR SCALE FOR DATAPOINTS
 
 		var height_min = d3.min(data, function(d) {                 
-			return d.energy_consumption;
-			console.log(d.energy_consumption);
+			return d.lumen/d.watt;
+			console.log(d.lumen/d.watt);
 		});
 		var height_max = d3.max(data, function(d) {
-			return d.energy_consumption;
+			return d.lumen/d.watt;
 		});
 
 		var height_scale = d3.scale.linear()
 		.domain([height_min,height_max])
-		.range(["#ffbf00","#ff4e00"]);
+		.range(["#ff0000","#FFD700"]);
 
 
 
@@ -471,9 +471,9 @@
 				.attr("cx", padding)
 				.attr("cy", padding)
 				.attr("class", "circle")
-				.style("fill", function(d) {return height_scale(d.energy_consumption);})
+				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
 				.style("stroke-width", function(d) {return d.lumen/10000+6;})
-				.style("stroke", function(d) {return height_scale(d.energy_consumption);});
+				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);});
 
 				// Add a label.
 				marker.append("svg:text")
