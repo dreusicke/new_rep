@@ -48,6 +48,7 @@
 				padding: 20px;
 				font: 10px sans-serif;
 				background-color: blue;
+				cursor: pointer;
 			}
 
 			.circle {
@@ -162,6 +163,7 @@
 
 			.marker{
 				background-color: #ff0000;
+				padding: 30px;
 			}
 
 		</style>
@@ -303,40 +305,24 @@
 				.attr("class", "marker");
 
 
-				var tooltip = d3.select("body").append("div")   
+				var tooltip = d3.select("body").append("div")
 				.attr("class", "tooltip")
 				.style("opacity", 0);
 
-				// Add a circle.
+				// Add an invisible bigger first circle for "padding" and hover effect
 				marker.append("svg:circle")
-				.attr("r", function(d) {return d.lumen/10000+3;})
-				//         .attr("r", 5)
+				.attr("r", 30)
 				.attr("cx", padding)
 				.attr("cy", padding)
-				.attr("class", "circle")
-				//         .on("mouseover", function(d){
-				//            //Get this bar's x/y values, then augment for the tooltip
-				//            var xPosition = parseFloat(d3.select(this).attr("x"));
-				//                console.log(xPosition);
-				//            var yPosition = parseFloat(d3.select(this).attr("y"));
-				//            //Update the tooltip position and value
-				//            d3.select("#tooltip")
-				//              .style("left", xPosition + "px")
-				//              .style("top", yPosition + "px")
-				//              .select("#value")
-				//              .text(d.name_lamp);
-				//            d3.select("#tooltip").classed("hidden", false);
-
-				//            console.log("mouseover kommt an!")
-				//         })
-
+				.style("fill", "white")
+				.style("opacity", 0)
 
 				.on("mouseover", function(d) {
 					tooltip.html(d)
 					.style("left", (d3.event.pageX) + "px")
 					.style("top", (d3.event.pageY - 28) + "px")
 					.style("color", "red")
-					.style("text-anchor", "left");
+					.style("text-anchor", "left")
 
 					d3.select("#tooltip").select("#number").text(d.number)
 					d3.select("#tooltip").select("#street_number").text(d.street_number)
@@ -351,7 +337,7 @@
 					d3.select("#tooltip").select("#lumen_per_watt").text(d.lumen_per_watt + " lm/W")
 					d3.select("#tooltip").select("#energy_efficiency").text(d.energy_efficiency)
 					d3.select("#tooltip").select("#height").text(d.height + " m")
-					d3.select("#tooltip").style("opacity", .9).transition().duration(100)
+					d3.select("#tooltip").style("opacity", .9).transition().duration(100);
 				})
 
 				.on("mouseout", function() {
@@ -359,21 +345,42 @@
 					d3.select("#tooltip").classed("hidden", true);
 				})
 
-				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
-				.style("stroke-width", function(d) {return d.lumen/10000+6;})
-				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);});
 
-				// Add a label.
-				marker.append("svg:text")
-				.attr("x", padding + 13)
-				.attr("y", padding)
-				.attr("dy", ".31em")
-				.attr("class", "label")
-				//  .attr("fill", function(d) {return height_scale(d.height - 1);}) //darker for better readability
-				.attr("fill", "white")
-				.attr("fill-opacity", "0.4")
-				.on("mouseover", function(d){d3.select(this).attr("fill-opacity", "1");}) // toDo: enable hover
-				//          .text(function(d) { return d.streetnumber + ". " + d.lamp + ", " + d.height + "m hoch " + d.installation;});
+				// Add the visible circle
+				marker.append("svg:circle")
+				.attr("r", function(d) {return d.lumen/10000+3;})
+				.attr("cx", function(d) {return d.lumen/10000+3;})
+				.attr("cy", padding)
+				.attr("class", "circle")
+
+				.on("mouseover", function(d) {
+					tooltip.html(d)
+					.style("left", (d3.event.pageX) + "px")
+					.style("top", (d3.event.pageY - 28) + "px")
+					.style("color", "red")
+					.style("text-anchor", "left")
+
+					d3.select("#tooltip").select("#number").text(d.number)
+					d3.select("#tooltip").select("#street_number").text(d.street_number)
+					d3.select("#tooltip").select("#light_amount").text(d.light_amount)
+					//						d3.select("#tooltip").select("#lamp").text(d.lamp)
+					d3.select("#tooltip").select("#installed").text(d.installed)
+					d3.select("#tooltip").select("#bulb").text(d.bulb)
+					d3.select("#tooltip").select("#watt").text(d.watt + " W")
+					d3.select("#tooltip").select("#energy_consumption").text(d.energy_consumption + " kWh")
+					d3.select("#tooltip").select("#lifespan").text(d.lifespan + " h")
+					d3.select("#tooltip").select("#lumen").text(d.lumen + " lm")
+					d3.select("#tooltip").select("#lumen_per_watt").text(d.lumen_per_watt + " lm/W")
+					d3.select("#tooltip").select("#energy_efficiency").text(d.energy_efficiency)
+					d3.select("#tooltip").select("#height").text(d.height + " m")
+					d3.select("#tooltip").style("opacity", .9).transition().duration(100);
+				})
+
+				.on("mouseout", function() {
+					d3.select("#tooltip").style("opacity", 0).transition().duration(500)
+					d3.select("#tooltip").classed("hidden", true);
+				})
+
 
 				function transform(d) {
 					//          console.log("d "+d);
