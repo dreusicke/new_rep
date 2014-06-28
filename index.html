@@ -300,6 +300,137 @@ importFunction3("schoenhauser_allee.csv", function(data) {
      
      
              
+//  IMPORT DATA FOR SCHOENHAUSER ALLEE FROM EXTERNAL FILE
+
+var importFunction4 = d3.dsv(";","text/csv");
+
+//  Load the station data. When the data comes back, create an overlay.
+importFunction4("prenzlauer.csv", function(data) {
+//    console.log(data);
+
+ //  CREATE COLOR SCALE FOR DATAPOINTS
+
+ var height_min = d3.min(data, function(d) {                 
+     return d.energy_consumption;
+     console.log(d.energy_consumption);
+     });
+ var height_max = d3.max(data, function(d) {
+     return d.energy_consumption;
+     });
+
+ var height_scale = d3.scale.linear()
+     .domain([height_min,height_max])
+     .range(["#ffbf00","#ff4e00"]);
+
+
+
+ //    CREATE OVERLAY FOR GOOGLE MAPS
+
+ var overlay = new google.maps.OverlayView();
+
+ // Add the container when the overlay is added to the map.
+ overlay.onAdd = function() {
+   var layer = d3.select(this.getPanes().overlayMouseTarget).append("div")
+       .attr("class", "datapoints");
+     
+
+     
+
+     
+ //    DRAW DATAPOINTS FOR heightS WITH SVG
+
+   // Draw each marker as a separate SVG element. We could use a single SVG, but what size would it have?
+   overlay.draw = function() {
+     var projection = this.getProjection()
+     var padding = 20;
+
+     //    var test = layer.selectAll("svg").data(data);
+     //    console.log("test "+test);
+
+     var marker = layer.selectAll("svg")
+         .data(data)
+         .each(transform) // update existing markers
+         .enter().append("svg:svg")
+         .each(transform)
+         .attr("class", "marker");
+
+     // Add a circle.
+     marker.append("svg:circle")
+         .attr("r", function(d) {return d.lumen/10000+3;})
+//         .attr("r", 5)
+         .attr("cx", padding)
+         .attr("cy", padding)
+         .attr("class", "circle")
+         .on("mouseover", function(d){
+            //Get this bar's x/y values, then augment for the tooltip
+            var xPosition = parseFloat(d3.select(this).attr("x")); 
+            var yPosition = parseFloat(d3.select(this).attr("y"));
+            //Update the tooltip position and value
+            d3.select("#tooltip")
+              .style("left", xPosition + "px")
+              .style("top", yPosition + "px")
+              .select("#value")
+              .text(d.name_lamp);
+            d3.select("#tooltip").classed("hidden", false);
+
+            console.log("mouseover kommt an!")
+         })
+//         .on("mouseover", function(){"div"}) // toDo: make markers clickable
+         .style("fill", function(d) {return height_scale(d.energy_consumption);})
+         .style("stroke-width", function(d) {return d.lumen/10000+6;})
+         .style("stroke", function(d) {return height_scale(d.energy_consumption);});
+
+     // Add a label.
+     marker.append("svg:text")
+         .attr("x", padding + 13)
+         .attr("y", padding)
+         .attr("dy", ".31em")
+         .attr("class", "label")
+     //  .attr("fill", function(d) {return height_scale(d.height - 1);}) //darker for better readability
+         .attr("fill", "white")
+         .attr("fill-opacity", "0.4")
+         .on("mouseover", function(d){d3.select(this).attr("fill-opacity", "1");}) // toDo: enable hover
+//          .text(function(d) { return d.streetnumber + ". " + d.lamp + ", " + d.height + "m hoch " + d.installation;});
+
+     function transform(d) {
+//          console.log("d "+d);
+       data_point = new google.maps.LatLng(normalize(d.lat), normalize(d.lon));
+       data_point_projected = projection.fromLatLngToDivPixel(data_point);
+       return d3.select(this)
+           .style("left", (data_point_projected.x - padding) + "px")
+           .style("top", (data_point_projected.y - padding) + "px");
+     }
+
+     function normalize(coordinate) {
+         // console.log("coordinate: "+coordinate);
+         if (coordinate > 1000) return coordinate / 100000;
+         else return coordinate;
+     }
+
+     function getColor(value){
+//          console.log("value "+value);
+         if (value > 4) return "red";
+         else return "green";
+     }
+//      function getColor(value){
+//
+//        if (value === "A+") return "yellow";
+//          if (value === "A") return "red";
+//         else return "white";  // we are looking for a proper value
+//      }
+//
+//        };
+//      };
+   };
+ };
+
+ // Bind our overlay to the map…
+ overlay.setMap(map);
+});
+
+     
+     
+             
 //  IMPORT DATA FOR PRENZLAUER ALLEE FROM EXTERNAL FILE
 
 var importFunction2 = d3.dsv(";","text/csv");
@@ -311,15 +442,16 @@ importFunction2("prenzlauer_allee.csv", function(data) {
  //  CREATE COLOR SCALE FOR DATAPOINTS
 
  var height_min = d3.min(data, function(d) {                 
-     return d.height;
+     return d.energy_consumption;
+     console.log(d.energy_consumption);
      });
  var height_max = d3.max(data, function(d) {
-     return d.height;
+     return d.energy_consumption;
      });
 
  var height_scale = d3.scale.linear()
      .domain([height_min,height_max])
-     .range(["#ff5800","#f9ff9a"]);
+     .range(["#ffbf00","#ff4e00"]);
 
 
 
@@ -356,8 +488,9 @@ importFunction2("prenzlauer_allee.csv", function(data) {
          .attr("cx", padding)
          .attr("cy", padding)
          .attr("class", "circle")
-         .on("mouseover", function(){alert("test")}) // toDo: make markers clickable
-         .style("fill", function(d) {return height_scale(d.height);});
+         .style("fill", function(d) {return height_scale(d.energy_consumption);})
+         .style("stroke-width", function(d) {return d.lumen/10000+6;})
+         .style("stroke", function(d) {return height_scale(d.energy_consumption);});
 
      // Add a label.
      marker.append("svg:text")
