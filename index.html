@@ -392,30 +392,36 @@
 				.enter().append("svg:svg")
 				.each(transform)
 				.attr("class", "marker")
-				.style("height", radius*2)
-				.style("width", radius*2);
+				.style("height", 30)
+				.style("width", 55)
+//				.style("background-color", "white");
 
-				// Add a circle.
-				marker.append("svg:circle")
-				//          .attr("r", function(d) {return d.height*1.1;})
-				.attr("r", radius)
-				.attr("cx", padding)
-				.attr("cy", padding)
-				.attr("class", "circle")
-				// .on("click", function(){alert("test")}) // toDo: make markers clickable
-				.style("fill", function(d) {return height_scale(d.cars);});
+				//				// Add a circle.
+				//				marker.append("svg:circle")
+				//				//          .attr("r", function(d) {return d.height*1.1;})
+				//				.attr("r", radius)
+				//				.attr("cx", padding)
+				//				.attr("cy", padding)
+				//				.attr("class", "circle")
+				//				// .on("click", function(){alert("test")}) // toDo: make markers clickable
+				//				.style("fill", function(d) {return height_scale(d.cars);});
 
-				// Add a label.
-				marker.append("svg:text")
-				.attr("x", padding + 13)
-				.attr("y", padding)
-				.attr("dy", ".31em")
-				.attr("class", "label")
-				//  .attr("fill", function(d) {return height_scale(d.height - 1);}) //darker for better readability
-				.attr("fill", "white")
-				.attr("fill-opacity", "0.4")
-				.on("mouseover", function(d){d3.select(this).attr("fill-opacity", "1");}) // toDo: enable hover
-				//          .text(function(d) { return d.streetnumber + ". " + d.lamp + ", " + d.height + "m hoch " + d.installation;});
+//				marker.append("svg:rect")
+//				.attr("x", 0)
+//				.attr("y", 0)
+//				//				.attr("rx", 3)
+//				//				.attr("ry", 3)
+//				.attr("width", 15)
+//				.attr("height", 15)
+//				.style("fill", function(d) {return height_scale(d.cars);});
+
+				marker.append("svg:path")
+				
+				.attr("d", "M48.52,34.51l-0.037-6.559c0-3.214-3.307-5.382-6.273-5.382H23.219l-2.879,8.373c0,0-10.541,0.039-13.05,0.039 S4.83,32.4,4.83,32.4v6.314c0,0.023,0.003,0.051,0.003,0.074H2.735v5.309h6.058c-0.073-0.377-0.114-0.762-0.114-1.158 c0-3.438,2.788-6.225,6.223-6.225c3.438,0,6.228,2.787,6.228,6.225c0,0.396-0.043,0.781-0.112,1.158h14.462 c-0.068-0.377-0.109-0.764-0.109-1.158c0-3.438,2.789-6.225,6.225-6.225c3.438,0,6.223,2.787,6.223,6.225 c0,0.406-0.041,0.805-0.113,1.189l3.703,0.047C52.559,35.503,48.52,34.51,48.52,34.51z M30.432,31.018h-6.728l1.795-6.729h4.933 V31.018z M40.897,31.167h-8.818V24.29h8.818V31.167z M15.042,38.337c-2.712,0-4.91,2.199-4.91,4.912s2.198,4.91,4.91,4.91 c2.713,0,4.911-2.197,4.911-4.91C19.954,40.536,17.755,38.337,15.042,38.337z M15.042,45.47c-1.226,0-2.218-0.994-2.218-2.221 c0-1.225,0.99-2.221,2.218-2.221c1.224,0,2.222,0.996,2.222,2.221C17.263,44.476,16.265,45.47,15.042,45.47z M41.506,38.337 c-2.713,0-4.912,2.199-4.912,4.912s2.199,4.91,4.912,4.91c2.711,0,4.91-2.197,4.91-4.91S44.217,38.337,41.506,38.337z M41.506,45.47 c-1.223,0-2.221-0.994-2.221-2.221c0-1.225,0.996-2.221,2.221-2.221s2.219,0.996,2.219,2.221 C43.725,44.476,42.731,45.47,41.506,45.47z")
+				.attr("transform", "translate(0, -20)")
+				.style("stroke-width", 2)
+				.style("stroke", "steelblue")
+				.style("fill", "green");
 
 				function transform(d) {
 					//          console.log("d "+d);
