@@ -28,6 +28,12 @@
 				margin: 0 10px 0 0;
 			}
 
+			.marker{
+				padding: 0px;
+				/*background-color is just for testing*/
+/*				background-color: blue;*/
+			}
+
 			.datapoints, .datapoints svg {
 				position: absolute;
 			}
@@ -134,8 +140,4 @@
 				text-align: left;
 				border-bottom: 1px dotted #888;
 				padding-left: .5em;
-			}
-
-			.marker{
-				padding: 0px;
 			}
