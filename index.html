@@ -57,12 +57,44 @@
 
 
 	//      CREATE GOOGLE MAP
+//	var map = new google.maps.Map(document.getElementById('map'), {
+//		center: new google.maps.LatLng(52.5377, 13.4281),
+//		//zoom: 17, // (good for one street)
+//		zoom: 15,
+//		mapTypeId: google.maps.MapTypeId.HYBRID,
+//		overviewMapControl: true,
+//		overviewMapControlOptions: {
+//			opened: true
+//		},
+//		styles: 
+//		[
+//			{
+//				"stylers": [
+//					{ "invert_lightness": true },
+//					{ "gamma": 0.93 },
+//					{ "lightness": -39 },
+//					{ "saturation": -81 }
+//				]
+//			},{
+//				"featureType": "road",
+//				"stylers": [
+//					{ "saturation": -40 },
+//					{ "lightness": 4 },
+//					{ "gamma": 1.04 }
+//				]
+//			}
+//		]
+//	});
 
 	var map = new google.maps.Map(document.getElementById('map'), {
 		center: new google.maps.LatLng(52.5377, 13.4281),
 		//zoom: 17, // (good for one street)
 		zoom: 15,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		overviewMapControl: true,
+		overviewMapControlOptions: {
+			opened: true
+		},
 		styles: 
 		[
 			{
