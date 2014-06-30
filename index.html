@@ -88,9 +88,9 @@
 
 	var map = new google.maps.Map(document.getElementById('map'), {
 		center: new google.maps.LatLng(52.5377, 13.4281), //good value for seeing both streets
-		center: new google.maps.LatLng(52.5400, 13.4129), // Schönhauser Allee 42
-		zoom: 17, // (good for one street)
-//		zoom: 15, // good for an overview
+//		center: new google.maps.LatLng(52.5400, 13.4129), // Schönhauser Allee 42
+//		zoom: 17, // (good for one street)
+		zoom: 15, // good for an overview
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		overviewMapControl: true,
 		overviewMapControlOptions: {
@@ -141,7 +141,8 @@
 		var height_scale = d3.scale.linear()
 		.domain([height_min,height_max])
 //		.range(["#ff0000","#FFD700"]); // yellow/red
-		.range(["#0080ff","#d2efff"]); // blue
+//		.range(["#0080ff","#d2efff"]); // blue
+		.range(["#ff6200","#d8ef00"]); // yellowgreen/red
 //		.range(["#f00","#50fc04"]); // green/red
 
 
@@ -229,13 +230,14 @@
 					d3.select("#tooltip").select("#lumen_per_watt").text(d.lumen/d.watt + " lm/W")
 					d3.select("#tooltip").select("#energy_efficiency").text(d.energy_efficiency)
 					d3.select("#tooltip").select("#powered").text("From 9.46pm to 4.34am")
-					d3.select("#tooltip").style("opacity", .9).transition().duration(100);
+					d3.select("#tooltip").classed("hidden", false).transition().duration(500);
+//					d3.select("#tooltip").style("opacity", .9).transition().duration(100);
 				})
 
 				.on("mouseout", function() {
-					d3.select("#tooltip").style("opacity", 0)
-					d3.select("#tooltip").classed("circleHighlighted", false).transition().duration(500);
-					d3.select(this).classed("hidden", true).transition().duration(500);
+//					d3.select(this).classed("circleHighlighted", false).transition().duration(500);
+//					d3.select("#tooltip").style("opacity", 0)
+					d3.select("#tooltip").classed("hidden", true).transition().duration(500);
 				})
 
 
