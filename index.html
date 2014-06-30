@@ -125,7 +125,7 @@
 	var importFunction3 = d3.dsv(";","text/csv");
 
 	//  Load the station data. When the data comes back, create an overlay.
-	importFunction3("schoenhauser_allee.csv", function(data) {
+	importFunction3("prenzl_schoen_allee.csv", function(data) {
 		//    console.log(data);
 
 		//  CREATE COLOR SCALE FOR DATAPOINTS
@@ -140,8 +140,9 @@
 
 		var height_scale = d3.scale.linear()
 		.domain([height_min,height_max])
-//		.range(["#ff0000","#FFD700"]);
-		.range(["#f00","#50fc04"]);
+//		.range(["#ff0000","#FFD700"]); // yellow/red
+		.range(["#0080ff","#d2efff"]); // blue
+//		.range(["#f00","#50fc04"]); // green/red
 
 
 		//    CREATE OVERLAY FOR GOOGLE MAPS
@@ -174,8 +175,8 @@
 				.attr("class", "marker")
 //				.style("height", function(d) {return (d.lumen/10000+3)*4;})
 //				.style("width", function(d) {return (d.lumen/10000+3)*4;});
-				.style("height", 100)
-				.style("width", 100)
+				.style("height", 25)
+				.style("width", 20)
 //				.style("height", 25)
 //				.style("width", 20)
 //				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
@@ -194,7 +195,6 @@
 				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
 				.style("fill-opacity", .4)
 				.style("stroke-width", 4)
-				.style("stroke", "white")
 				.style("stroke-opacity", .4)
 				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
 				
