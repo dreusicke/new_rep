@@ -128,5 +128,47 @@
 			.td_data {
 				text-align: left;
 				border-bottom: 1px dotted #888;
+				padding-right: .5em;
+			}
+
+			.td_name_first {
+				text-align: left;
+				border-bottom: 1px solid #888;
+				padding: 1em .5em 0 0;
+			}
+
+			.td_data_first {
+				text-align: left;
+				border-bottom: 1px solid #888;
+				padding: 1em 0 0 .5em;
+			}
+
+			.td_name_single {
+				text-align: left;
+				border-bottom: 1px solid #888;
+				padding-right: .5em;
+			}
+
+			.td_data_single {
+				text-align: left;
+				border-bottom: 1px solid #888;
 				padding-left: .5em;
 			}
+
+			.td_name_double {
+				text-align: left;
+				border-bottom: 3px double #888;
+				padding: 1em .5em 0 0;
+				margin-bottom: .5px;
+			}
+
+			.td_data_double {
+				text-align: left;
+				border-bottom: 3px double #888;
+				padding: 1em 0 0 .5em;
+				margin-bottom: .5px;
+			}
+
+
+
+
