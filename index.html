@@ -208,7 +208,35 @@
 				.attr("class", "tooltip_light");
 
 				var ee = function(d) {
-					 console.log("ee: " + d.energy_efficiency);
+//					 console.log("ee: " + d.energy_efficiency);
+					if (d.energy_efficiency == "A") {
+						console.log("yeah!");
+						return
+						marker.append("svg:rect")
+						.attr("x", 30.335)
+						.attr("y", 66.791)
+						.attr("height", 13.331)
+						.attr("width", 18.705)
+						.style("fill", "black")
+						.style("fill-opacity", .4)
+						.style("stroke-width", 4)
+						.style("stroke-opacity", .4)
+						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+					};
+					if (d.energy_efficiency == "A+") {
+						console.log("yeah+!");
+						return
+						marker.append("svg:rect")
+						.attr("x", 30.335)
+						.attr("y", 66.791)
+						.attr("height", 13.331)
+						.attr("width", 18.705)
+						.style("fill", "black")
+						.style("fill-opacity", .4)
+						.style("stroke-width", 4)
+						.style("stroke-opacity", .4)
+						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+					};
 					if (d.energy_efficiency == "A+") return "A+";
 					if (d.energy_efficiency == "A") return "A";
 					else return d.energy_efficiency;
