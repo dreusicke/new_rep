@@ -213,7 +213,63 @@
 					if (d.energy_efficiency == "A") return "A";
 					else return d.energy_efficiency;
 				}
+Hallo Michael,
 
+das ist in der D3-Logik nicht einfach zu implementieren.
+Das Problem: "function (d){}" funktioniert nur als Argument innerhalb von D3-Methoden, also in den Methoden, die man an "marker" anhängt. Daher kannst Du die Unterscheidung zwischen A und A+ nur für jedes Attribut oder Style einzeln setzen, z.B.:
+
+.style("fill", function (d) {
+    if (d.energy_efficiency == "A") return "white";
+    else if (d.energy_efficiency == "A+" return "black";
+    else return "red";
+});
+
+Wenn Du diese Funktion aus irgendwelchen Gründen mehrmals brauchst, kannst Du sie auch in einer Variable speichern:
+
+var f_efficiency_type = function (d) {
+    if (d.energy_efficiency == "A") return "white";
+    else if (d.energy_efficiency == "A+" return "black";
+    else return "red";
+}
+
+.style("fill", f_efficiency_type)
+
+Wenn ich Dich nun richtig verstehe, möchtest Du gerne mehrere attribute und styles auf einmal in einer Funktion kapseln. Das ist im Prinzip möglich, man muss aber genauer in die Dokumentation schauen:
+Bei der Methode "append" ( https://github.com/mbostock/d3/wiki/Selections#append ) kann man entweder einen Elementnamen oder eine Funktion einsetzen, die ein Element zurückgibt:
+
+"The name may be specified either as a constant string or as a function that returns the DOM element to append"
+
+Das heißt, dass Deine Funktion ein DOM-Element generieren muss. Das geht so:
+var svg_element = document.createElement("svg:rect");
+
+Allerdings kann man dann darauf nicht die .attr und .style Methoden von D3 anwenden, deswegen muss man noch per d3.select() ein D3-Objekt draus machen:
+var svg_element = d3.select(document.createElement("svg:rect");
+
+Deine Funktion könnte dann so aussehen:
+
+var ee = function (d) {
+
+    var svg_element = d3.select(document.createElement("svg:rect"));
+    
+    if (d.energy_efficiency == "A") {
+         svg_element.attr("x", 30");
+         ...
+    } else if (d.energy_effiency == "A+") {
+         svg_element.attr("x", 30");
+         ...
+    }
+    return svg_element.node(); // mit .node() holt man sich dann das nackte Element zurück
+
+}
+
+Die if-Unterscheidung kannst Du natürlich auch an den Anfang stellen und abhängig davon unterschiedliche SVG-Objekte erzeugen.
+
+Der Aufruf erfolgt dann über
+marker.append(ee);
+
+Ich weiß nicht, ob auch .append die Variable d mit übergibt. Davon hängt ab, ob das ganze funktioniert.
+				
+				
 				var ee = function(d) {
 					console.log("ee: " + d.energy_efficiency );
 //					if (d.energy_efficiency == "A") {
