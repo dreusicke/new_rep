@@ -3,7 +3,7 @@
 	<head>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 		<meta charset="UTF-8">
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> // keep "false" to avoid ugly gried of the map
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="css.css">
 	</head>
@@ -41,29 +41,29 @@
 
 				</p>
 			</div>
-		<div id="tooltip_traffic" class="hidden">
-			<p class="infobox">
-			<table>
-				<tbody>
-					<tr><td class="thead" colspan="2">Details for traffic</td></tr>
-					<tr><td class="td_name_first">lat/lon</td><td class="td_data_first"><span id="lat">dummie/</span> / <span id="lon">dummie</span></td></tr>
-					<tr><td class="td_name">Streetname</td><td class="td_data"><span id="streetname">dummie</span></td></tr>
-					<tr><td class="td_name">Pedestrians</td><td class="td_data"><span id="pedestrian_night">dummie</span></td></tr>
-					<tr><td class="td_name_single">Bikes</td><td class="td_data_single"><span id="bike_night">dummie</span></td></tr>
-					<tr><td class="td_name_double">No motor</td><td class="td_data_double"><span id="mean_unmotorized_night">dummie</span></td></tr>
-					<tr><td class="td_name_first">Cars</td><td class="td_data_first"><span id="car_night">dummie</span></td></tr>
-					<tr><td class="td_name">Trucks</td><td class="td_data"><span id="truck_night">dummie</span></td></tr>
-					<tr><td class="td_name">Vans</td><td class="td_data"><span id="van_night">dummie</span></td></tr>
-					<tr><td class="td_name">Motorbikes</td><td class="td_data"><span id="motorbike_night">dummie</span></td></tr>
-					<tr><td class="td_name_single">Busses</td><td class="td_data_single"><span id="bus_night">dummie</span></td></tr>
-					<tr><td class="td_name_double">Yes motor</td><td class="td_data_double"><span id="mean_motorized_night">dummie</span></td></tr>
-				</tbody>
-			</table>
+			<div id="tooltip_traffic" class="hidden">
+				<p class="infobox">
+				<table>
+					<tbody>
+						<tr><td class="thead" colspan="2">Details for traffic</td></tr>
+						<tr><td class="td_name_first">lat/lon</td><td class="td_data_first"><span id="lat">dummie/</span> / <span id="lon">dummie</span></td></tr>
+						<tr><td class="td_name">Streetname</td><td class="td_data"><span id="streetname">dummie</span></td></tr>
+						<tr><td class="td_name">Pedestrians</td><td class="td_data"><span id="pedestrian_night">dummie</span></td></tr>
+						<tr><td class="td_name_single">Bikes</td><td class="td_data_single"><span id="bike_night">dummie</span></td></tr>
+						<tr><td class="td_name_double">No motor</td><td class="td_data_double"><span id="mean_unmotorized_night">dummie</span></td></tr>
+						<tr><td class="td_name_first">Cars</td><td class="td_data_first"><span id="car_night">dummie</span></td></tr>
+						<tr><td class="td_name">Trucks</td><td class="td_data"><span id="truck_night">dummie</span></td></tr>
+						<tr><td class="td_name">Vans</td><td class="td_data"><span id="van_night">dummie</span></td></tr>
+						<tr><td class="td_name">Motorbikes</td><td class="td_data"><span id="motorbike_night">dummie</span></td></tr>
+						<tr><td class="td_name_single">Busses</td><td class="td_data_single"><span id="bus_night">dummie</span></td></tr>
+						<tr><td class="td_name_double">Yes motor</td><td class="td_data_double"><span id="mean_motorized_night">dummie</span></td></tr>
+					</tbody>
+				</table>
 
-			</p>
-		</div>
+				</p>
+			</div>
 
-	</form>
+		</form>
 
 <div id="map"></div>
 
@@ -137,10 +137,6 @@
 		]
 	});
 
-	// google.maps.event.addListener(map, "click", function(){
-	//    alert("Map clicked");
-	// });
-
 	//  IMPORT DATA FOR SCHOENHAUSER ALLEE FROM EXTERNAL FILE
 
 	var importFunction3 = d3.dsv(";","text/csv");
@@ -207,86 +203,59 @@
 				var tooltip_light = d3.select("body").append("div")
 				.attr("class", "tooltip_light");
 
-				var ee = function(d) {
-//					 console.log("ee: " + d.energy_efficiency);
-					if (d.energy_efficiency == "A") {
-						console.log("yeah!");
-						return
-						marker.append("svg:rect")
-						.attr("x", 30.335)
-						.attr("y", 66.791)
-						.attr("height", 13.331)
-						.attr("width", 18.705)
-						.style("fill", "white")
-						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
-					};
-					if (d.energy_efficiency == "A+") {
-						console.log("yeah+!");
-						return
-						marker.append("svg:rect")
-						.attr("x", 30.335)
-						.attr("y", 66.791)
-						.attr("height", 13.331)
-						.attr("width", 18.705)
-						.style("fill", "black")
-						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
-					};
-					if (d.energy_efficiency == "A+") return "A+";
-					if (d.energy_efficiency == "A") return "A";
-					else return d.energy_efficiency;
-				}
+//				var ee = function(d) {
+////					 console.log("ee: " + d.energy_efficiency);
+//					if (d.energy_efficiency == "A") {
+//						console.log("yeah!");
+//						return
+//						marker.append("svg:rect")
+//						.attr("x", 30.335)
+//						.attr("y", 66.791)
+//						.attr("height", 13.331)
+//						.attr("width", 18.705)
+//						.style("fill", "white")
+//						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+//					};
+//					if (d.energy_efficiency == "A+") {
+//						console.log("yeah+!");
+//						return
+//						marker.append("svg:rect")
+//						.attr("x", 30.335)
+//						.attr("y", 66.791)
+//						.attr("height", 13.331)
+//						.attr("width", 18.705)
+//						.style("fill", "black")
+//						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+//					};
+////					else return d.energy_efficiency;
+//				}
 
 //				FIXME: HOW TO CALL THE MARKERS?
-				
-				.ee;
+//				var nice = function(d) {return ee; console.log("möp");};
+//				marker.append("svg:rect")
+//				d3.select(this)
+//				.text(d.name_lamp);
 
-//				marker.append("svg:rect")
-//				.attr("x", 30.335)
-//				.attr("y", 66.791)
-//				.attr("height", 13.331)
-//				.attr("width", 18.705)
-//				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
-//				.style("fill-opacity", .4)
-//				.style("stroke-width", 4)
-//				.style("stroke-opacity", .4)
-//				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
-//				.text(ee);
-//
-//				marker.append("svg:rect")
-//				.attr("x", 23.171)
-//				.attr("y", 59.477)
-//				.attr("height", 8.557)
-//				.attr("width", 27.658)
-//				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
-//				.style("fill-opacity", .4)
-//				.style("stroke-width", 4)
-//				.style("stroke-opacity", .4)
-//				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+				marker.append("svg:polygon")
+				.attr("points", "7.472,19.17 15.042,19.17 15.042,21.781 13.082,21.781 13.103,27.111 9.425,27.111 9.433,21.781 7.472,21.781")
+				.style("fill", "#9C9696")
+				.style("fill-opacity", .4)
+				.style("stroke-width", 2)
+				.style("stroke-opacity", .43)
+				.style("stroke", "#9C9696")
+
 
 				marker.append("svg:path")
-//				.attr("d", "M13.316,15.942l-1.205,0.701l-0.001,1.389l0.002,6.734H7.267v-6.734 l-0.001-1.389l-1.202-0.7c-2.28-1.329-3.642-3.667-3.643-6.254c0-4.008,3.262-7.266,7.268-7.268 c4.008,0.001,7.268,3.26,7.268,7.268C16.954,12.275,15.597,14.612,13.316,15.942z") //old bulb
-				.attr("d", "M37.002,9.504c-14.947,0-27.063,12.116-27.063,27.062c0,10.336,5.397,19.319,13.918,23.876h26.509 c8.397-4.592,13.696-13.629,13.696-23.876C64.062,21.621,51.946,9.504,37.002,9.504z") //new bulb
-
+////				.attr("d", "M13.316,15.942l-1.205,0.701l-0.001,1.389l0.002,6.734H7.267v-6.734 l-0.001-1.389l-1.202-0.7c-2.28-1.329-3.642-3.667-3.643-6.254c0-4.008,3.262-7.266,7.268-7.268 c4.008,0.001,7.268,3.26,7.268,7.268C16.954,12.275,15.597,14.612,13.316,15.942z") //old bulb
+//				.attr("d", "M37.002,9.504c-14.947,0-27.063,12.116-27.063,27.062c0,10.336,5.397,19.319,13.918,23.876h26.509 c8.397-4.592,13.696-13.629,13.696-23.876C64.062,21.621,51.946,9.504,37.002,9.504z") //new bulb
+				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z") //newest bulb head
+//
 				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
 				.style("fill-opacity", .4)
-				.style("stroke-width", 4)
-				.style("stroke-opacity", .4)
-				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
-				//
-				//				// Add the VISIBLE circle
-				//				marker.append("svg:circle")
-				////				.attr("r", radius)
-				//				.attr("r", 5)
-				//				.attr("cx", function(d) {return (d.lumen/10000+3)*2;})
-				//				.attr("cy", function(d) {return (d.lumen/10000+3)*2;})
-				//				.attr("class", "circle")
-				//
-				//				.style("position", "absolut")
-				//				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
-				//				.style("opacity", 0.6)
-				//				.style("stroke-width", function(d) {return d.lumen/10000+6;})
-				//				.style("stroke-opacity", .3)
-				//				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+				.style("stroke-width", 1)
+				.style("stroke-opacity", .43)
+				.style("stroke", "black")
+				.text("A")
 
 				.on("mouseover", function(d) {
 					tooltip_light.html(d)
