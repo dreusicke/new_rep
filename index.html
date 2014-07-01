@@ -217,10 +217,7 @@
 						.attr("y", 66.791)
 						.attr("height", 13.331)
 						.attr("width", 18.705)
-						.style("fill", "black")
-						.style("fill-opacity", .4)
-						.style("stroke-width", 4)
-						.style("stroke-opacity", .4)
+						.style("fill", "white")
 						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
 					};
 					if (d.energy_efficiency == "A+") {
@@ -232,9 +229,6 @@
 						.attr("height", 13.331)
 						.attr("width", 18.705)
 						.style("fill", "black")
-						.style("fill-opacity", .4)
-						.style("stroke-width", 4)
-						.style("stroke-opacity", .4)
 						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
 					};
 					if (d.energy_efficiency == "A+") return "A+";
@@ -242,28 +236,32 @@
 					else return d.energy_efficiency;
 				}
 
-				marker.append("svg:rect")
-				.attr("x", 30.335)
-				.attr("y", 66.791)
-				.attr("height", 13.331)
-				.attr("width", 18.705)
-				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
-				.style("fill-opacity", .4)
-				.style("stroke-width", 4)
-				.style("stroke-opacity", .4)
-				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
-				.text(ee);
+//				FIXME: HOW TO CALL THE MARKERS?
+				
+				.ee;
 
-				marker.append("svg:rect")
-				.attr("x", 23.171)
-				.attr("y", 59.477)
-				.attr("height", 8.557)
-				.attr("width", 27.658)
-				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
-				.style("fill-opacity", .4)
-				.style("stroke-width", 4)
-				.style("stroke-opacity", .4)
-				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+//				marker.append("svg:rect")
+//				.attr("x", 30.335)
+//				.attr("y", 66.791)
+//				.attr("height", 13.331)
+//				.attr("width", 18.705)
+//				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
+//				.style("fill-opacity", .4)
+//				.style("stroke-width", 4)
+//				.style("stroke-opacity", .4)
+//				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+//				.text(ee);
+//
+//				marker.append("svg:rect")
+//				.attr("x", 23.171)
+//				.attr("y", 59.477)
+//				.attr("height", 8.557)
+//				.attr("width", 27.658)
+//				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
+//				.style("fill-opacity", .4)
+//				.style("stroke-width", 4)
+//				.style("stroke-opacity", .4)
+//				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
 
 				marker.append("svg:path")
 //				.attr("d", "M13.316,15.942l-1.205,0.701l-0.001,1.389l0.002,6.734H7.267v-6.734 l-0.001-1.389l-1.202-0.7c-2.28-1.329-3.642-3.667-3.643-6.254c0-4.008,3.262-7.266,7.268-7.268 c4.008,0.001,7.268,3.26,7.268,7.268C16.954,12.275,15.597,14.612,13.316,15.942z") //old bulb
