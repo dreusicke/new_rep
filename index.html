@@ -110,8 +110,8 @@
 	var map = new google.maps.Map(document.getElementById('map'), {
 		center: new google.maps.LatLng(52.5377, 13.4281), //good value for seeing both streets
 		//		center: new google.maps.LatLng(52.5400, 13.4129), // Schönhauser Allee 42
-		//		zoom: 17, // (good for one street)
-		zoom: 15, // good for an overview
+				zoom: 17, // (good for one street)
+//		zoom: 15, // good for an overview
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		overviewMapControl: true,
 		overviewMapControlOptions: {
@@ -239,7 +239,7 @@
 				marker.append("svg:polygon") // bulb foot
 				.attr("points", "7.472,19.17 15.042,19.17 15.042,21.781 13.082,21.781 13.103,27.111 9.425,27.111 9.433,21.781 7.472,21.781")
 				.style("fill", "#9C9696")
-				.style("fill-opacity", .9)
+				.style("fill-opacity", .4)
 				.style("stroke-width", 2)
 				.style("stroke-opacity", .43)
 				.style("stroke", "#9C9696")
@@ -247,21 +247,15 @@
 				
 				marker.append("svg:path") // bulb head
 				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
-				.style("fill-opacity", .3)
-				.style("stroke-width", 1)
-				.style("stroke-opacity", .43)
-				.style("stroke", "black")
-
 				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
-				.style("fill-opacity", .9)
-				.style("stroke-width", 1)
-				.style("stroke-opacity", .43)
-				.style("stroke", "white")
+				.style("fill-opacity", .7)
+				.style("stroke-width", 3)
+				.style("stroke-opacity", .7)
+				.style("stroke", "#9C9696")
 
 				.on("mouseover", function(d) {
 					tooltip_light.html(d)
 					//					d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
-
 					d3.select("#tooltip_light").select("#name_lamp").text(d.name_lamp)
 					d3.select("#tooltip_light").select("#installed").text(d.installed)
 					d3.select("#tooltip_light").select("#bulb").text(d.bulb)
@@ -273,20 +267,31 @@
 					d3.select("#tooltip_light").select("#energy_efficiency").text(d.energy_efficiency)
 					d3.select("#tooltip_light").select("#powered").text("From 9.46pm to 4.34am")
 					d3.select("#tooltip_light").classed("hidden", false).transition().duration(500)
-					//					d3.select("#tooltip_light").style("opacity", 0).delay(100)
-					//					d3.select("#tooltip_light").transition().duration(1000).style("opacity", 1)
 					;
 				})
 
 				.on("mouseout", function() {
 					//					d3.select(this).classed("circleHighlighted", false).transition().duration(500);
-					//					d3.select("#tooltip_light").style("opacity", 0).transition().duration(500)
 					d3.select("#tooltip_light").classed("hidden", true)
 					;
 				})
 
+// 				marker.append("svg:path") // bulb head double for the nice shine
+//				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
+//				.style("fill-opacity", 0)
+//				.style("stroke-width", 8)
+//				.style("stroke-opacity", .43)
+//				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+
 				marker.append("svg:path")// "A"" or "A+"?
-				.attr("d", "M9.317,15.611l-0.964,2.363H7.221l4.035-9.826l4.035,9.826h-1.132l-0.964-2.363H9.317z M11.257,10.725l-1.502,3.812h3.004 L11.257,10.725z") //newest bulb head
+				.attr("d",  function (d) {
+					if (d.energy_efficiency == "A") return "M9.317,15.611l-0.964,2.363H7.221l4.035-9.826l4.035,9.826h-1.132l-0.964-2.363H9.317z M11.257,10.725l-1.502,3.812h3.004 L11.257,10.725z";
+					else if (d.energy_efficiency == "A+") return "M11.938,9.436v3.562h3.195v1.438h-3.195v3.562h-1.291v-3.562H7.454v-1.438h3.193V9.436H11.938z";
+					else return "M9.317,15.611l-0.964,2.363H7.221l4.035-9.826l4.035,9.826h-1.132l-0.964-2.363H9.317z M11.257,10.725l-1.502,3.812h3.004 L11.257,10.725z";})
+				.style("fill-opacity", .3)
+				.style("stroke-width", 1)
+				.style("stroke-opacity", .43)
+				.style("stroke", "black")
 
 
 				function transform(d) {
