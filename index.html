@@ -137,186 +137,6 @@
 		]
 	});
 
-	//  IMPORT DATA FOR SCHOENHAUSER ALLEE FROM EXTERNAL FILE
-
-	var importFunction3 = d3.dsv(";","text/csv");
-
-	//  Load the station data. When the data comes back, create an overlay.
-	importFunction3("prenzl_schoen_allee.csv", function(data) {
-		//    console.log(data);
-
-		//  CREATE COLOR SCALE FOR DATAPOINTS
-
-		var height_min = d3.min(data, function(d) {
-			return d.EEI;
-			console.log(d.EEI);
-		});
-		var height_max = d3.max(data, function(d) {
-			return d.EEI;
-		});
-
-		var height_scale = d3.scale.linear()
-		.domain([height_min,height_max])
-		//		.range(["#ff0000","#FFD700"]); // yellow/red
-		//		.range(["#0080ff","#d2efff"]); // blue
-		.range(["#d8ef00","#ff6200"]); // yellowgreen/red
-		//		.range(["#f00","#50fc04"]); // green/red
-
-
-		//    CREATE OVERLAY FOR GOOGLE MAPS
-
-		var overlay = new google.maps.OverlayView();
-
-		// Add the container when the overlay is added to the map.
-		overlay.onAdd = function() {
-			var layer = d3.select(this.getPanes().overlayMouseTarget).append("div")
-			.attr("class", "datapoints");
-
-
-			//    DRAW DATAPOINTS FOR LIGHTS WITH SVG
-
-			// Draw each marker as a separate SVG element. We could use a single SVG, but what size would it have?
-			overlay.draw = function() {
-				var projection = this.getProjection()
-				var padding = 10;
-
-				//    var test = layer.selectAll("svg").data(data);
-				//    console.log("test "+test);
-
-				var radius = function(d) {return d.lumen/10000+3;}; 
-
-				var marker = layer.selectAll("svg")
-				.data(data)
-				.each(transform) // update existing markers
-				.enter().append("svg:svg")
-				.each(transform)
-				.attr("class", "marker")
-				//				.style("height", function(d) {return (d.lumen/10000+3)*4;})
-				//				.style("width", function(d) {return (d.lumen/10000+3)*4;});
-				.style("height", 100)
-				.style("width", 100)
-				//				.style("height", 25)
-				//				.style("width", 20)
-				//				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
-
-
-				var tooltip_light = d3.select("body").append("div")
-				.attr("class", "tooltip_light");
-
-//				var ee = function(d) {
-////					 console.log("ee: " + d.energy_efficiency);
-//					if (d.energy_efficiency == "A") {
-//						console.log("yeah!");
-//						return
-//						marker.append("svg:rect")
-//						.attr("x", 30.335)
-//						.attr("y", 66.791)
-//						.attr("height", 13.331)
-//						.attr("width", 18.705)
-//						.style("fill", "white")
-//						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
-//					};
-//					if (d.energy_efficiency == "A+") {
-//						console.log("yeah+!");
-//						return
-//						marker.append("svg:rect")
-//						.attr("x", 30.335)
-//						.attr("y", 66.791)
-//						.attr("height", 13.331)
-//						.attr("width", 18.705)
-//						.style("fill", "black")
-//						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
-//					};
-////					else return d.energy_efficiency;
-//				}
-
-//				FIXME: HOW TO CALL THE MARKERS?
-//				var nice = function(d) {return ee; console.log("möp");};
-//				marker.append("svg:rect")
-//				d3.select(this)
-//				.text(d.name_lamp);
-
-				marker.append("svg:polygon") // bulb foot
-				.attr("points", "7.472,19.17 15.042,19.17 15.042,21.781 13.082,21.781 13.103,27.111 9.425,27.111 9.433,21.781 7.472,21.781")
-				.style("fill", "#9C9696")
-				.style("fill-opacity", .4)
-				.style("stroke-width", 2)
-				.style("stroke-opacity", .43)
-				.style("stroke", "#9C9696")
-
-				
-				marker.append("svg:path") // bulb head
-				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
-				.style("fill", function(d) {return height_scale(d.EEI);})
-				.style("fill-opacity", .7)
-				.style("stroke-width", 1)
-				.style("stroke-opacity", .7)
-				.style("stroke", "#9C9696")
-
-				.on("mouseover", function(d) {
-					tooltip_light.html(d)
-					//					d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
-					d3.select("#tooltip_light").select("#name_lamp").text(d.name_lamp)
-					d3.select("#tooltip_light").select("#installed").text(d.installed)
-					d3.select("#tooltip_light").select("#bulb").text(d.bulb)
-					d3.select("#tooltip_light").select("#type_bulb").text("Natrium vapor discharge lamp")
-					d3.select("#tooltip_light").select("#watt").text(d.watt + " W")
-					d3.select("#tooltip_light").select("#energy_consumption").text(d.energy_consumption + " kWh")
-					d3.select("#tooltip_light").select("#lumen").text(d.lumen + " lm")
-					d3.select("#tooltip_light").select("#lumen_per_watt").text(d.lumen/d.watt + " lm/W")
-					d3.select("#tooltip_light").select("#energy_efficiency").text(d.energy_efficiency)
-					d3.select("#tooltip_light").select("#powered").text("From 9.46pm to 4.34am")
-					d3.select("#tooltip_light").classed("hidden", false).transition().duration(500)
-					;
-				})
-
-				.on("mouseout", function() {
-					//					d3.select(this).classed("circleHighlighted", false).transition().duration(500);
-					d3.select("#tooltip_light").classed("hidden", true)
-					;
-				})
-
-// 				marker.append("svg:path") // bulb head double for the nice shine
-//				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
-//				.style("fill-opacity", 0)
-//				.style("stroke-width", 8)
-//				.style("stroke-opacity", .43)
-//				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
-
-				marker.append("svg:path")// "A"" or "A+"?
-				.attr("d",  function (d) {
-					if (d.energy_efficiency == "A") return "M9.317,15.611l-0.964,2.363H7.221l4.035-9.826l4.035,9.826h-1.132l-0.964-2.363H9.317z M11.257,10.725l-1.502,3.812h3.004 L11.257,10.725z";
-					else if (d.energy_efficiency == "A+") return "M11.938,9.436v3.562h3.195v1.438h-3.195v3.562h-1.291v-3.562H7.454v-1.438h3.193V9.436H11.938z";
-					else return "M9.317,15.611z";})
-				.style("fill-opacity", .9)
-
-
-				function transform(d) {
-					//          console.log("d "+d);
-					data_point = new google.maps.LatLng(normalize(d.lat), normalize(d.lon));
-					data_point_projected = projection.fromLatLngToDivPixel(data_point);
-					return d3.select(this)
-					.style("left", (data_point_projected.x - padding) + "px")
-					.style("top", (data_point_projected.y - padding) + "px");
-				}
-
-				function normalize(coordinate) {
-					// console.log("coordinate: "+coordinate);
-					if (coordinate > 1000) return coordinate / 100000;
-					else return coordinate;
-				}
-
-				function getColor(value){
-					//          console.log("value "+value);
-					if (value > 4) return "red";
-					else return "green";
-				}
-			};
-		};
-
-		// Bind our overlay to the map…
-		overlay.setMap(map);
-	});
 
 
 	//  TRAFFIC VISIALIZATION
@@ -458,6 +278,203 @@
 		overlay.setMap(map);
 	});
 
+	
+	//  IMPORT DATA FOR SCHOENHAUSER ALLEE FROM EXTERNAL FILE
+
+	var importFunction3 = d3.dsv(";","text/csv");
+
+	//  Load the station data. When the data comes back, create an overlay.
+	importFunction3("prenzl_schoen_allee.csv", function(data) {
+		//    console.log(data);
+
+		//  CREATE COLOR SCALE FOR DATAPOINTS
+
+		var height_min = d3.min(data, function(d) {
+			return d.EEI;
+			console.log(d.EEI);
+		});
+		var height_max = d3.max(data, function(d) {
+			return d.EEI;
+		});
+
+		var height_scale = d3.scale.linear()
+		.domain([height_min,height_max])
+		//		.range(["#ff0000","#FFD700"]); // yellow/red
+		//		.range(["#0080ff","#d2efff"]); // blue
+		.range(["#d8ef00","#ff6200"]); // yellowgreen/red
+		//		.range(["#f00","#50fc04"]); // green/red
+
+		var lumen_min = d3.min(data, function(d) {
+			return d.lumen;
+			console.log(d.EEI);
+		});
+		var lumen_max = d3.max(data, function(d) {
+			return d.lumen;
+		});
+
+		var lumen_scale = d3.scale.linear()
+		.domain([lumen_max, lumen_min])
+		//		.range(["#ff0000","#FFD700"]); // yellow/red
+		//		.range(["#0080ff","#d2efff"]); // blue
+		.range([0.7, 1]); // yellowgreen/red
+		//		.range(["#f00","#50fc04"]); // green/red
+
+
+		//    CREATE OVERLAY FOR GOOGLE MAPS
+
+		var overlay = new google.maps.OverlayView();
+
+		// Add the container when the overlay is added to the map.
+		overlay.onAdd = function() {
+			var layer = d3.select(this.getPanes().overlayMouseTarget).append("div")
+			.attr("class", "datapoints");
+
+
+			//    DRAW DATAPOINTS FOR LIGHTS WITH SVG
+
+			// Draw each marker as a separate SVG element. We could use a single SVG, but what size would it have?
+			overlay.draw = function() {
+				var projection = this.getProjection()
+				var padding = 10;
+
+				//    var test = layer.selectAll("svg").data(data);
+				//    console.log("test "+test);
+
+				var radius = function(d) {return d.lumen/10000+3;}; 
+
+				var marker = layer.selectAll("svg")
+				.data(data)
+				.each(transform) // update existing markers
+				.enter().append("svg:svg")
+				.each(transform)
+				.attr("class", "marker")
+				//				.style("height", function(d) {return (d.lumen/10000+3)*4;})
+				//				.style("width", function(d) {return (d.lumen/10000+3)*4;});
+				.style("height", 100)
+				.style("width", 100)
+				//				.style("height", 25)
+				//				.style("width", 20)
+				//				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
+
+
+				var tooltip_light = d3.select("body").append("div")
+				.attr("class", "tooltip_light");
+
+//				var ee = function(d) {
+////					 console.log("ee: " + d.energy_efficiency);
+//					if (d.energy_efficiency == "A") {
+//						console.log("yeah!");
+//						return
+//						marker.append("svg:rect")
+//						.attr("x", 30.335)
+//						.attr("y", 66.791)
+//						.attr("height", 13.331)
+//						.attr("width", 18.705)
+//						.style("fill", "white")
+//						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+//					};
+//					if (d.energy_efficiency == "A+") {
+//						console.log("yeah+!");
+//						return
+//						marker.append("svg:rect")
+//						.attr("x", 30.335)
+//						.attr("y", 66.791)
+//						.attr("height", 13.331)
+//						.attr("width", 18.705)
+//						.style("fill", "black")
+//						.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+//					};
+////					else return d.energy_efficiency;
+//				}
+
+//				FIXME: HOW TO CALL THE MARKERS?
+//				var nice = function(d) {return ee; console.log("möp");};
+//				marker.append("svg:rect")
+//				d3.select(this)
+//				.text(d.name_lamp);
+
+				marker.append("svg:polygon") // bulb foot
+				.attr("points", "7.472,19.17 15.042,19.17 15.042,21.781 13.082,21.781 13.103,27.111 9.425,27.111 9.433,21.781 7.472,21.781")
+				.style("fill", "#9C9696")
+				.style("fill-opacity", .4)
+				.style("stroke-width", 2)
+				.style("stroke-opacity", .43)
+				.style("stroke", "#9C9696")
+
+				
+				marker.append("svg:path") // bulb head
+				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
+				.style("fill", function(d) {return height_scale(d.EEI);})
+				.style("fill-opacity", function(d) {return lumen_scale(d.lumen);})
+//				.style("fill-opacity", .2)
+				.style("stroke-width", 1)
+				.style("stroke-opacity", .7)
+				.style("stroke", "#9C9696")
+
+				.on("mouseover", function(d) {
+					tooltip_light.html(d)
+					//					d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
+					d3.select("#tooltip_light").select("#name_lamp").text(d.name_lamp)
+					d3.select("#tooltip_light").select("#installed").text(d.installed)
+					d3.select("#tooltip_light").select("#bulb").text(d.bulb)
+					d3.select("#tooltip_light").select("#type_bulb").text("Natrium vapor discharge lamp")
+					d3.select("#tooltip_light").select("#watt").text(d.watt + " W")
+					d3.select("#tooltip_light").select("#energy_consumption").text(d.energy_consumption + " kWh")
+					d3.select("#tooltip_light").select("#lumen").text(d.lumen + " lm")
+					d3.select("#tooltip_light").select("#lumen_per_watt").text(d.lumen/d.watt + " lm/W")
+					d3.select("#tooltip_light").select("#energy_efficiency").text(d.energy_efficiency)
+					d3.select("#tooltip_light").select("#powered").text("From 9.46pm to 4.34am")
+					d3.select("#tooltip_light").classed("hidden", false).transition().duration(500)
+					;
+				})
+
+				.on("mouseout", function() {
+					//					d3.select(this).classed("circleHighlighted", false).transition().duration(500);
+					d3.select("#tooltip_light").classed("hidden", true)
+					;
+				})
+
+// 				marker.append("svg:path") // bulb head double for the nice shine
+//				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
+//				.style("fill-opacity", 0)
+//				.style("stroke-width", 8)
+//				.style("stroke-opacity", .43)
+//				.style("stroke", function(d) {return height_scale(d.lumen/d.watt);})
+
+				marker.append("svg:path")// "A"" or "A+"?
+				.attr("d",  function (d) {
+					if (d.energy_efficiency == "A") return "M9.317,15.611l-0.964,2.363H7.221l4.035-9.826l4.035,9.826h-1.132l-0.964-2.363H9.317z M11.257,10.725l-1.502,3.812h3.004 L11.257,10.725z";
+					else if (d.energy_efficiency == "A+") return "M11.938,9.436v3.562h3.195v1.438h-3.195v3.562h-1.291v-3.562H7.454v-1.438h3.193V9.436H11.938z";
+					else return "M9.317,15.611z";})
+				.style("fill-opacity", .9)
+
+
+				function transform(d) {
+					//          console.log("d "+d);
+					data_point = new google.maps.LatLng(normalize(d.lat), normalize(d.lon));
+					data_point_projected = projection.fromLatLngToDivPixel(data_point);
+					return d3.select(this)
+					.style("left", (data_point_projected.x - padding) + "px")
+					.style("top", (data_point_projected.y - padding) + "px");
+				}
+
+				function normalize(coordinate) {
+					// console.log("coordinate: "+coordinate);
+					if (coordinate > 1000) return coordinate / 100000;
+					else return coordinate;
+				}
+
+				function getColor(value){
+					//          console.log("value "+value);
+					if (value > 4) return "red";
+					else return "green";
+				}
+			};
+		};
+
+		// Bind our overlay to the map…
+		overlay.setMap(map);
+	});
 
 	////      Additional triangle just for pleasure
 	////      marker.append("svg:path")
