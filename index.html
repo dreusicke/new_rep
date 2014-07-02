@@ -148,18 +148,18 @@
 		//  CREATE COLOR SCALE FOR DATAPOINTS
 
 		var height_min = d3.min(data, function(d) {
-			return d.lumen/d.watt;
-			console.log(d.lumen/d.watt);
+			return d.EEI;
+			console.log(d.EEI);
 		});
 		var height_max = d3.max(data, function(d) {
-			return d.lumen/d.watt;
+			return d.EEI;
 		});
 
 		var height_scale = d3.scale.linear()
 		.domain([height_min,height_max])
 		//		.range(["#ff0000","#FFD700"]); // yellow/red
 		//		.range(["#0080ff","#d2efff"]); // blue
-		.range(["#ff6200","#d8ef00"]); // yellowgreen/red
+		.range(["#d8ef00","#ff6200"]); // yellowgreen/red
 		//		.range(["#f00","#50fc04"]); // green/red
 
 
@@ -183,7 +183,7 @@
 				//    var test = layer.selectAll("svg").data(data);
 				//    console.log("test "+test);
 
-				var radius = function(d) {return d.lumen/10000+3;};
+				var radius = function(d) {return d.lumen/10000+3;}; 
 
 				var marker = layer.selectAll("svg")
 				.data(data)
@@ -247,7 +247,7 @@
 				
 				marker.append("svg:path") // bulb head
 				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
-				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
+				.style("fill", function(d) {return height_scale(d.EEI);})
 				.style("fill-opacity", .7)
 				.style("stroke-width", 1)
 				.style("stroke-opacity", .7)
