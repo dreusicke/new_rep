@@ -410,7 +410,7 @@
 
 				.on("mouseover", function(d) {
 					tooltip_light.html(d)
-					//					d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
+					d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
 					d3.select("#tooltip_light").select("#name_lamp").text(d.name_lamp)
 					d3.select("#tooltip_light").select("#installed").text(d.installed)
 					d3.select("#tooltip_light").select("#bulb").text(d.bulb)
