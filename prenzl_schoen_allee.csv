@@ -1,4 +1,4 @@
-number;lat;lon;lamp;name_lamp;picture;installed;bulb;watt;energy_consumption;lifespan;lumen_per_watt;lumen;energy_efficiency;height;EEI
+number;lat;lon;lamp;name_lamp;picture;installed;bulb;watt;energy_consumption;lifespan;lumen_per_watt;lumen;energy_efficiency;height;eei
 42299-2110001-00;52.52722984;13.41602674;SIE*5NA630-1-6TZ*6NAV-E150;Siteco Mastleuchte 5NA 630;Nein;02.11.93;NAV-T150* 4Y;150;168;32000;97;14500;A;15;0.183718604408643
 42299-2110002-00;52.5274439;13.41637934;LBL*2NA150*EK;Leuchte der Firma Leuchtenbau Leipzig;Ja;01.01.80;NAV-E150*SUPER 4Y;150;168;32000;112;17000;A+;16;0.158271596118171
 42299-2110003-00;52.52758837;13.41593128;A&G*CLASSICA*1800*NAV-T100* LUME*SKL2;A&G Classica;Ja;08.11.95;NAV-T100*SUPER 4Y;100;110;32000;-;10700;A+;9.05;0.162514975724318

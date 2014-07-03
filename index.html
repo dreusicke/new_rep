@@ -33,7 +33,7 @@
 						<tr><td class="td_name">Power output in Watt</td><td class="td_data"><span id="watt">dummie</span></td></tr>
 						<tr><td class="td_name">Energy consumption</td><td class="td_data"><span id="energy_consumption">dummie</span></td></tr>
 						<tr><td class="td_name">Light output in Lumen</td><td class="td_data"><span id="lumen">dummie</span></td></tr>
-						<tr><td class="td_name">Energy efficiency</td><td class="td_data"><span id="lumen_per_watt">dummie</span></td></tr>
+						<tr><td class="td_name">Energy efficiency index</td><td class="td_data"><span id="eei">dummie</span></td></tr>
 						<tr><td class="td_name">Efficiency class</td><td class="td_data"><span id="energy_efficiency">dummie</span></td></tr>
 						<tr><td class="td_name">Powered</td><td class="td_data"><span id="powered">dummie</span></td></tr>
 					</tbody>
@@ -290,11 +290,11 @@
 		//  CREATE COLOR SCALE FOR DATAPOINTS
 
 		var height_min = d3.min(data, function(d) {
-			return d.EEI;
-			console.log(d.EEI);
+			return d.eei;
+			console.log(d.eei);
 		});
 		var height_max = d3.max(data, function(d) {
-			return d.EEI;
+			return d.eei;
 		});
 
 		var height_scale = d3.scale.linear()
@@ -306,18 +306,14 @@
 
 		var lumen_min = d3.min(data, function(d) {
 			return d.lumen;
-			console.log(d.EEI);
+			console.log(d.eei);
 		});
 		var lumen_max = d3.max(data, function(d) {
 			return d.lumen;
 		});
-
 		var lumen_scale = d3.scale.linear()
 		.domain([lumen_max, lumen_min])
-		//		.range(["#ff0000","#FFD700"]); // yellow/red
-		//		.range(["#0080ff","#d2efff"]); // blue
-		.range([0.7, 1]); // yellowgreen/red
-		//		.range(["#f00","#50fc04"]); // green/red
+		.range([0.7, 1]);
 
 
 		//    CREATE OVERLAY FOR GOOGLE MAPS
@@ -354,7 +350,8 @@
 				.style("width", 100)
 				//				.style("height", 25)
 				//				.style("width", 20)
-				//				.style("fill", function(d) {return height_scale(d.lumen/d.watt);})
+				.style("fill", "blue")
+//				.style("fill-opacitiy", ".5")
 
 
 				var tooltip_light = d3.select("body").append("div")
@@ -404,7 +401,7 @@
 				
 				marker.append("svg:path") // bulb head
 				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
-				.style("fill", function(d) {return height_scale(d.EEI);})
+				.style("fill", function(d) {return height_scale(d.eei);})
 				.style("fill-opacity", function(d) {return lumen_scale(d.lumen);})
 //				.style("fill-opacity", .2)
 				.style("stroke-width", 1)
