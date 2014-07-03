@@ -3,7 +3,7 @@
 	<head>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 		<meta charset="UTF-8">
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> // keep "false" to avoid ugly gried of the map
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="css.css">
 	</head>
@@ -17,8 +17,6 @@ Students: Michael Dreusicke, Nadine Mollenhauer, Maria Rieger, Viktoria Schult, 
 Team leaders: Anne Koslowski, Mileen Mollenhauer.<br />
 Project supervisor: Björn Stockleben</p>
 		</div>
-		<img scr="/img/storyboard_2a.png" alt="Abbildung Storyboard 2a" width="200px" height="200px">
-		<h3>Karte von Straßenlaternen in Berlin</h3>
 		<form class="button">
 
 			<input type="button" value="Show car traffic" class="button" onClick="alert('yes!');">
@@ -111,10 +109,10 @@ Project supervisor: Björn Stockleben</p>
 	//	});
 
 	var map = new google.maps.Map(document.getElementById('map'), {
-//		center: new google.maps.LatLng(52.5377, 13.4281), //good value for seeing both streets
-		center: new google.maps.LatLng(52.5400, 13.4129), // Schönhauser Allee 42
-				zoom: 17, // (good for one street)
-//		zoom: 15, // good for an overview
+		center: new google.maps.LatLng(52.5377, 13.4281), //good value for seeing both streets
+//		center: new google.maps.LatLng(52.5400, 13.4129), // Schönhauser Allee 42
+//				zoom: 17, // (good for one street)
+		zoom: 15, // good for an overview
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		overviewMapControl: true,
 		overviewMapControlOptions: {
@@ -166,9 +164,11 @@ Project supervisor: Björn Stockleben</p>
 
 		var height_scale = d3.scale.linear()
 		.domain([height_min,height_max])
-		.range(["#76ff00","#fd4501"]);
+//		.range(["#76ff00","#fd4501"]);
+		.range(["green", "blue", "yellow", "red"]);
 
 
+		
 
 		//    CREATE OVERLAY FOR GOOGLE MAPS
 
@@ -229,28 +229,29 @@ Project supervisor: Björn Stockleben</p>
 				.style("stroke-width", 2)
 				//				.style("stroke", "steelblue")
 				.style("fill", function(d) {return height_scale(d.car_night);})
+//				.style("fill", "white")
 
-  .on("mouseover", function(d) {
-          tooltip_traffic.html(d)
-          //          d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
+				.on("mouseover", function(d) {
+								tooltip_traffic.html(d)
+								//          d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
 
-          d3.select("#tooltip_traffic").select("#lat").text(d.lat)
-          d3.select("#tooltip_traffic").select("#lon").text(d.lon)
-          d3.select("#tooltip_traffic").select("#streetname").text(d.streetname)
-          d3.select("#tooltip_traffic").select("#pedestrian_night").text(d3.round(d.pedestrian_night))
-          d3.select("#tooltip_traffic").select("#bike_night").text(d3.round(d.bike_night))
-          d3.select("#tooltip_traffic").select("#mean_unmotorized_night").text(d3.round(d.mean_unmotorized_night))
-          d3.select("#tooltip_traffic").select("#car_night").text(d3.round(d.car_night))
-          d3.select("#tooltip_traffic").select("#truck_night").text(d3.round(d.truck_night))
-          d3.select("#tooltip_traffic").select("#van_night").text(d3.round(d.van_night))
-          d3.select("#tooltip_traffic").select("#motorbike_night").text(d3.round(d.motorbike_night))
-          d3.select("#tooltip_traffic").select("#bus_night").text(d3.round(d.bus_night))
-          d3.select("#tooltip_traffic").select("#mean_motorized_night").text(d3.round(d.mean_motorized_night))
-          d3.select("#tooltip_traffic").classed("hidden", false).transition().duration(500)
-          //          d3.select("#tooltip_traffic").style("opacity", 0).delay(100)
-          //          d3.select("#tooltip_traffic").transition().duration(1000).style("opacity", 1)
-          ;
-        })
+								d3.select("#tooltip_traffic").select("#lat").text(d.lat)
+								d3.select("#tooltip_traffic").select("#lon").text(d.lon)
+								d3.select("#tooltip_traffic").select("#streetname").text(d.streetname)
+								d3.select("#tooltip_traffic").select("#pedestrian_night").text(d3.round(d.pedestrian_night))
+								d3.select("#tooltip_traffic").select("#bike_night").text(d3.round(d.bike_night))
+								d3.select("#tooltip_traffic").select("#mean_unmotorized_night").text(d3.round(d.mean_unmotorized_night))
+								d3.select("#tooltip_traffic").select("#car_night").text(d3.round(d.car_night))
+								d3.select("#tooltip_traffic").select("#truck_night").text(d3.round(d.truck_night))
+								d3.select("#tooltip_traffic").select("#van_night").text(d3.round(d.van_night))
+								d3.select("#tooltip_traffic").select("#motorbike_night").text(d3.round(d.motorbike_night))
+								d3.select("#tooltip_traffic").select("#bus_night").text(d3.round(d.bus_night))
+								d3.select("#tooltip_traffic").select("#mean_motorized_night").text(d3.round(d.mean_motorized_night))
+								d3.select("#tooltip_traffic").classed("hidden", false).transition().duration(500)
+								//          d3.select("#tooltip_traffic").style("opacity", 0).delay(100)
+								//          d3.select("#tooltip_traffic").transition().duration(1000).style("opacity", 1)
+								;
+							})
 
 				.on("mouseout", function() {
 					//					d3.select(this).classed("circleHighlighted", false).transition().duration(500);
