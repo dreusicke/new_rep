@@ -152,15 +152,19 @@ Project supervisor: Björn Stockleben</p>
 
 		//  CREATE COLOR SCALE FOR DATAPOINTS
 
-//		var traffic_min = d3.min(data, function(d) {return d.car_night;});
-		var traffic_min = d3.min([2,4,5,6,7,8,9,12]);
+		
+		var cars = function(d) {return +d.car_night}; //fucking "+" before "d" is necessary to handle the output as a number (not a string)
+
+		var traffic_min = d3.min(data, cars);
+//		var traffic_min = d3.min([2,4,5,6,7,8,9,12]);
 		console.log("car_min: " + traffic_min);
 
-		var traffic_max = d3.max(data, function(d) {return d.car_night;});
+		//		var traffic_max = d3.max(data, function(d) {return d.car_night;});
+		var traffic_max = d3.max(data, cars);
 		console.log("car_max: " + traffic_max);
 
 		var traffic_scale = d3.scale.linear()
-		.domain([50,1600])
+		.domain([traffic_min,traffic_max])
 		//		.range(["#ff0000","#FFD700"]); // yellow/red
 		//		.range(["#0080ff","#d2efff"]); // blue
 		.range(["green","red"]); // yellowgreen/red
