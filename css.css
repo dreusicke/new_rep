@@ -1,177 +1,171 @@
-			html, body {
-				height: 100%;
-				width: 100%;
-				margin: 0;
-				padding: 0;
-				background-color: black;
-			}
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: black;
+}
 
-			body {
-				width: 98%;
-				color: #fff2cf;
-				font-family: Arial, sans-serif;
-				padding: 1em;
-			}
+body {
+	width: 98%;
+	color: #fff2cf;
+	font-family: Arial, sans-serif;
+	padding: 1em;
+}
 
-			#map {
-				width: 100%;
-				height: 85%;
-				margin: 0;
-				padding: 0;
-			}
+#map {
+	width: 100%;
+	height: 85%;
+	margin: 0;
+	padding: 0;
+}
 
-			h1, h2, h3, h4, h5, h6 {
-				font-weight: 100;
-			}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 100;
+}
 
-			p {
-				font-size: 0.8em;
-				font-weight: 100;
-				margin: 0 10px 0 0;
-			}
+p {
+	font-size: 0.8em;
+	font-weight: 100;
+	margin: 0 10px 0 0;
+}
 
-			.marker{
-				padding: 0px;
-				/*background-color is just for testing*/
-/*				background-color: blue;*/
-			}
+.marker{
+	padding: 0px;
+	/*background-color is just for testing*/
+	/*				background-color: blue;*/
+}
 
-			.datapoints, .datapoints svg {
-				position: absolute;
-			}
+.datapoints, .datapoints svg {
+	position: absolute;
+}
 
-			.datapoints svg {
-				width:  2em; /*only fallback values*/
-				height: 2em; /*only fallback values*/
-				cursor: pointer;
-			}
+.datapoints svg {
+	width:  2em; /*only fallback values*/
+	height: 2em; /*only fallback values*/
+	cursor: pointer;
+}
 
-			.circle {
-			}
+.circle {
+}
 
-			.circleHighlighted {
-				stroke: #fff;
-				stroke-width: 30;
-				fill: #fff;
-				fill-opacity: 1;
-			}
+.circleHighlighted {
+	stroke: #fff;
+	stroke-width: 30;
+	fill: #fff;
+	fill-opacity: 1;
+}
 
-			form.button {
-				/*  position: absolute;*/
-				bottom: 20px;
-				right: 20px;
-				z-index: 100000000;
-				text-align: right;
-				margin: 0 0% 1em 0;
-			}
+form.button {
+	/*  position: absolute;*/
+	bottom: 20px;
+	right: 20px;
+	z-index: 100000000;
+	text-align: right;
+	margin: 0 0% 1em 0;
+}
 
-			input.button {
-				padding: 10px;
-				color: #6A4E03;
-				margin-left: 1em;
-			}
+input.button {
+	padding: 10px;
+	color: #6A4E03;
+	margin-left: 1em;
+}
 
-			#tooltip_light, #tooltip_traffic {
-				position: absolute;
-				font-family: sans-serif;
-				font-size: 12px;
-				font-weight: 100;
-				line-height: 130%;
-				color: #fff;
-				-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
-				filter: alpha(opacity=80);
-				-moz-opacity: 0.8;
-				-khtml-opacity: 0.8;
-				opacity: 0.8;
-				right: 10px;
-				z-index: 1000;
-				margin-top: 50px;
-				width: auto;
-				height: auto;
-				padding: 10px;
-				background-color: #000;
-				border: 1px solid  #777;
-				-webkit-border-radius: 5px;
-				-moz-border-radius: 5px;
-				border-radius: 5px;
-				-webkit-box-shadow: 4px 4px 10px rgba(159, 201, 252, 0.4);
-				-moz-box-shadow: 4px 4px 10px rgba(159, 201, 252, 0.4);
-				box-shadow: 4px 4px 10px rgba(159, 201, 252, 0.4);
-				pointer-events: none;
-			}
+#tooltip_light, #tooltip_traffic {
+	position: absolute;
+	font-family: sans-serif;
+	font-size: 12px;
+	font-weight: 100;
+	line-height: 130%;
+	color: #fff;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.8;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+	right: 10px;
+	z-index: 1000;
+	margin-top: 50px;
+	width: auto;
+	height: auto;
+	padding: 10px;
+	background-color: #000;
+	border: 1px solid  #777;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 4px 4px 10px rgba(159, 201, 252, 0.4);
+	-moz-box-shadow: 4px 4px 10px rgba(159, 201, 252, 0.4);
+	box-shadow: 4px 4px 10px rgba(159, 201, 252, 0.4);
+	pointer-events: none;
+}
 
-			.hidden {
-				display: none;
-			}
+.hidden {
+	display: none;
+}
 
-			#tooltip_light p, tooltip_traffic p { margin: 0;
-			}
+#tooltip_light p, tooltip_traffic p { margin: 0;
+}
 
-			table {
-				background-color: #111;
-				text-align: left;
-			}
+table {
+	background-color: #111;
+	text-align: left;
+}
 
-			.thead {
-				background-color: #000;
-				text-align: center;
-				font-size: 1.5em;
-				font-weight: 100;
-				padding: .5em 0 .7em 0;
-			}
+.thead {
+	background-color: #000;
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 100;
+	padding: .5em 0 .7em 0;
+}
 
-			.td_name {
-				text-align: left;
-				border-bottom: 1px dotted #888;
-				padding-right: .5em;
-			}
+.td_name {
+	text-align: left;
+	border-bottom: 1px dotted #888;
+	padding-right: .5em;
+}
 
-			.td_data_light {
-				color: #fff;
-				text-align: left;
-				border-bottom: 1px dotted #888;
-				padding-right: .5em;
-			}
+.td_data_light {
+	color: #fff;
+	text-align: left;
+	border-bottom: 1px dotted #888;
+	padding-right: .5em;
+}
 
-			.td_data_car {
-				color: #fff;
-				text-align: right;
-				border-bottom: 1px dotted #888;
-				padding-right: .5em;
-			}
+.td_data_car {
+	color: #fff;
+	text-align: right;
+	border-bottom: 1px dotted #888;
+	padding-right: .5em;
+}
 
-			.td_name_first {
-				text-align: left;
-				border-bottom: 1px solid #888;
-				padding: 1em .5em 0 0;
-			}
+.td_data_first {
+	text-align: right;
+	border-bottom: 1px solid #888;
+	padding: 1em .5em 0 .5em;
+}
 
-			.td_data_first {
-				text-align: right;
-				border-bottom: 1px solid #888;
-				padding: 1em .5em 0 .5em;
-			}
+.td_name_double {
+	color: #fff;
+	text-align: left;
+	border-bottom: 3px double #888;
+	padding: 1em .5em 0 0;
+	margin-bottom: .5px;
+}
 
-			.td_name_double {
-				color: #fff;
-				text-align: left;
-				border-bottom: 3px double #888;
-				padding: 1em .5em 0 0;
-				margin-bottom: .5px;
-			}
+.td_data_double {
+	text-align: right;
+	border-bottom: 3px double #888;
+	padding: 1em .5em 0 .5em;
+	margin-bottom: .5px;
+}
 
-			.td_data_double {
-				text-align: right;
-				border-bottom: 3px double #888;
-				padding: 1em .5em 0 .5em;
-				margin-bottom: .5px;
-			}
-
-			#eei_range, #lumen_range, #watt_range, #consumption_range, #efficiency_range, #car_range, #bus_range {
-				font-size: smaller;
-				color: #aaa;
-				text-align: right;
-			}
+#eei_range, #lumen_range, #watt_range, #consumption_range, #efficiency_range, #car_range, #bus_range {
+	font-size: smaller;
+	color: #aaa;
+	margin-left: 5px;
+}
 
 
 
