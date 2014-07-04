@@ -301,7 +301,7 @@
 		console.log("watt_max: " + watt_max);
 		var watt_radius_scale = d3.scale.linear()
 		.domain([watt_min, watt_max])
-		.range([10, 20]); //used for radius of outer circle
+		.range([100, 400]); //used for radius of outer circle
 
 		var lumen_min = d3.min(data, lumens);
 		console.log("lumen_min: " + lumen_min);
@@ -312,7 +312,7 @@
 		.range(["#d8ef00","#ff6200"]);
 		var lumen_radius_scale = d3.scale.linear()
 		.domain([lumen_min, lumen_max])
-		.range([4, 15]); // used for radius of inner circle
+		.range([20, 200]); // used for radius of inner circle
 
 		var consumption_min = d3.min(data, consumptions);
 		console.log("consumption_min: " + consumption_min);
@@ -355,21 +355,23 @@
 				.attr("class", "marker")
 				//				.style("height", function(d) {return (d.lumen/10000+3)*4;})
 				//				.style("width", function(d) {return (d.lumen/10000+3)*4;});
-				.style("height", 100)
-				.style("width", 100)
+				.style("height", function(d){return radius_outer})
+				.style("width", function(d){return radius_outer})
 				//				.style("height", 25)
 				//				.style("width", 20)
-				.style("fill", "blue")
+				//				.style("fill", "blue")
 				//				.style("fill-opacitiy", ".5")
 
 
 				var tooltip_light = d3.select("body").append("div")
 				.attr("class", "tooltip_light");
 
-				var radius_outer = function(d) {return watt_radius_scale(d.watt);}; //smallest value should be 10; input 50-250
-				var radius_inner = function(d) {return lumen_radius_scale(d.lumen);}; //smallest value should be 3; input 4000-33000
+				var radius_outer = function(d) {return Math.sqrt(watt_radius_scale(d.watt));}; //smallest value should be 10; input 50-250; squareroot of value for radius to use area instead of actual radius
+				//				var radius_outer = function(d) {return watt_radius_scale(d.watt);}; //smallest value should be 10; input 50-250
+				//				var radius_inner = function(d) {return lumen_radius_scale(d.lumen);}; //smallest value should be 3; input 4000-33000
+				var radius_inner = function(d) {return Math.sqrt(lumen_radius_scale(d.lumen));}; //smallest value should be 3; input 4000-33000
 
-				// Add a circle.
+				// Outer circle.
 				marker.append("svg:circle")
 				.attr("r", radius_outer)
 				//				.attr("r", 15)
@@ -379,55 +381,11 @@
 				//				.style("fill", function(d) {return eei_scale(d.eei);})
 				.style("fill", "white")
 				//				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
-				.style("fill-opacity", .8)
+				.style("fill-opacity", .7)
 				.style("stroke-width", 1)
-				.style("stroke-opacity", .7)
-				.style("stroke", "#9C9696")
+				.attr("transform", "translate(-radius_outer/2, -radius_outer/2)")
 
-				marker.append("svg:arc")
-				var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
-								.outerRadius(30);
-
-						var pie = d3.layout.pie()           //this will create arc data for us given a list of values
-								.value(function(d) { return d.eei; });    //we must tell it out to access the value of each element in our data array
-
-//						var arcs = marker.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
-//								.data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
-//								.enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
-//										.append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
-//												.attr("class", "slice");    //allow us to style things in the slices (like text)
-
-								arcs.append("svg:path")
-												.attr("fill", function(d, i) { return color(i); } ) //set the color for each slice to be chosen from the color function defined above
-												.attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
-
-								arcs.append("svg:text")                                     //add a label to each slice
-												.attr("transform", function(d) {                    //set the label's origin to the center of the arc
-												//we have to make sure to set these before calling arc.centroid
-												d.innerRadius = 0;
-												d.outerRadius = r;
-												return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
-										})
-										.attr("text-anchor", "middle")                          //center the text on it's origin
-										.text(function(d, i) { return data[i].label; });        //get the label from our original data array				var outerRadius = w / 2;
-				var innerRadius = 0;
-				var arc = d3.svg.arc()
-				.innerRadius(innerRadius)
-				.outerRadius(outerRadius)
-
-				.attr("r", radius_outer)
-				//				.attr("r", 15)
-				.attr("cx", radius_outer)
-				.attr("cy", radius_outer)
-				.attr("class", "circle")
-				//				.style("fill", function(d) {return eei_scale(d.eei);})
-				.style("fill", "white")
-				//				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
-				.style("fill-opacity", .8)
-				.style("stroke-width", 1)
-				.style("stroke-opacity", .7)
-				.style("stroke", "#9C9696")
-
+				// Inner circle.
 				marker.append("svg:circle")
 				.attr("r", radius_inner)
 				.attr("cx", radius_outer)
@@ -437,8 +395,7 @@
 				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
 				//				.style("fill-opacity", .2)
 				.style("stroke-width", 1)
-				.style("stroke-opacity", .7)
-				.style("stroke", "#9C9696")
+				.style("stroke", "#3b3939")
 
 				.on("mouseover", function(d) {
 					tooltip_light.html(d)
@@ -487,13 +444,13 @@
 				//				.style("stroke-opacity", .43)
 				//				.style("stroke", function(d) {return eei_scale(d.lumen/d.watt);})
 
-				marker.append("svg:path")// "A"" or "A+"?
-				.attr("d",  function (d) {
-					if (d.energy_efficiency == "A") return "M9.317,15.611l-0.964,2.363H7.221l4.035-9.826l4.035,9.826h-1.132l-0.964-2.363H9.317z M11.257,10.725l-1.502,3.812h3.004 L11.257,10.725z";
-					else if (d.energy_efficiency == "A+") return "M11.938,9.436v3.562h3.195v1.438h-3.195v3.562h-1.291v-3.562H7.454v-1.438h3.193V9.436H11.938z";
-					else return "M9.317,15.611z";})
-				.style("fill-opacity", .9)
-				.attr("transform", "translate(-radius_outer, -radius_outer)")
+				//				marker.append("svg:path")// "A"" or "A+"?
+				//				.attr("d",  function (d) {
+				//					if (d.energy_efficiency == "A") return "M9.317,15.611l-0.964,2.363H7.221l4.035-9.826l4.035,9.826h-1.132l-0.964-2.363H9.317z M11.257,10.725l-1.502,3.812h3.004 L11.257,10.725z";
+				//					else if (d.energy_efficiency == "A+") return "M11.938,9.436v3.562h3.195v1.438h-3.195v3.562h-1.291v-3.562H7.454v-1.438h3.193V9.436H11.938z";
+				//					else return "M9.317,15.611z";})
+				//				.style("fill-opacity", .9)
+				//				.attr("transform", "translate(-radius_outer, -radius_outer)")
 
 
 
@@ -523,25 +480,6 @@
 		// Bind our overlay to the map…
 		overlay.setMap(map);
 	});
-
-	////      Additional triangle just for pleasure
-	////      marker.append("svg:path")
-	////          .attr('d', function(d) { 
-	////            var x = padding -10, y = padding - 15;
-	////            return 'M ' + x +' '+ y + ' l 4 4 l -8 0 z'; //M: startcenter, l: draw line after walk, z: close shape
-	////          })
-	////          .attr("fill-opacity", "0.5")
-	////          .style("fill", "#00d8ff");
-	//
-	////      Another shape for pleasure
-	////      marker.append("svg:path")
-	////        .attr('d', function(d) { 
-	////          var x = padding -10 , y = padding - 5;
-	////          return 'M ' + x +' '+ y + ' l 5 5 l -5 5 l -5 -5 z';
-	////        })
-	////        .attr("fill-opacity", "0.5")
-	////        .style("fill", "#00d8ff");
-	//
 
 </script>
 </body>
