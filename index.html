@@ -13,9 +13,9 @@
 			<h1>„Sense my city“ - LIGHTeSCAPE</h1>
 			<h3>Streetlights and traffic in Prenzlauer Allee and Schönhauser Allee, Berlin</h3>
 			<p>„Sense my city“ is an international project of the University of Applied Sciences Magdeburg-Stendal, M.A. Crossmedia, in cooperation with University of Maribor. Summer term 2014.<br />
-Students: Michael Dreusicke, Nadine Mollenhauer, Maria Rieger, Viktoria Schult, Laura Schulz, Alexandra Seegerer, Katrin Wildt.<br />
-Team leaders: Anne Koslowski, Mileen Mollenhauer.<br />
-Project supervisor: Björn Stockleben</p>
+				Students: Michael Dreusicke, Nadine Mollenhauer, Maria Rieger, Viktoria Schult, Laura Schulz, Alexandra Seegerer, Katrin Wildt.<br />
+				Team leaders: Anne Koslowski, Mileen Mollenhauer.<br />
+				Project supervisor: Björn Stockleben</p>
 		</div>
 		<form class="button">
 
@@ -42,29 +42,29 @@ Project supervisor: Björn Stockleben</p>
 
 				</p>
 			</div>
-			<div id="tooltip_traffic" class="hidden">
-				<p class="infobox">
-				<table>
-					<tbody>
-						<tr><td class="thead" colspan="2">Road users: 2-3am</td></tr>
-<!--						<tr><td class="td_name_first">lat/lon</td><td class="td_data_first"><span id="lat">dummie/</span> / <span id="lon">dummie</span></td></tr>-->
-<!--						<tr><td class="td_name">Streetname</td><td class="td_data_car"><span id="streetname">dummie</span></td></tr>-->
-						<tr><td class="td_name">Pedestrians</td><td class="td_data_car"><span id="pedestrian_night">dummie</span></td></tr>
-						<tr><td class="td_name">Bikes</td><td class="td_data_car"><span id="bike_night">dummie</span></td></tr>
-						<tr><td class="td_name_double">Unmotorized traffic</td><td class="td_data_double"><span id="mean_unmotorized_night">dummie</span></td></tr>
-						<tr><td class="td_name_first">Cars</td><td class="td_data_first"><span id="traffic_night">dummie</span></td></tr>
-						<tr><td class="td_name">Trucks</td><td class="td_data_car"><span id="truck_night">dummie</span></td></tr>
-						<tr><td class="td_name">Vans</td><td class="td_data_car"><span id="van_night">dummie</span></td></tr>
-						<tr><td class="td_name">Motorbikes</td><td class="td_data_car"><span id="motorbike_night">dummie</span></td></tr>
-						<tr><td class="td_name">Busses</td><td class="td_data_car"><span id="bus_night">dummie</span></td></tr>
-						<tr><td class="td_name_double">Motorized traffic</td><td class="td_data_double"><span id="mean_motorized_night">dummie</span></td></tr>
-					</tbody>
-				</table>
+		<div id="tooltip_traffic" class="hidden">
+			<p class="infobox">
+			<table>
+				<tbody>
+					<tr><td class="thead" colspan="2">Road users: 2-3am</td></tr>
+					<!--						<tr><td class="td_name_first">lat/lon</td><td class="td_data_first"><span id="lat">dummie/</span> / <span id="lon">dummie</span></td></tr>-->
+					<!--						<tr><td class="td_name">Streetname</td><td class="td_data_car"><span id="streetname">dummie</span></td></tr>-->
+					<tr><td class="td_name">Pedestrians</td><td class="td_data_car"><span id="pedestrian_night">dummie</span></td></tr>
+					<tr><td class="td_name">Bikes</td><td class="td_data_car"><span id="bike_night">dummie</span></td></tr>
+					<tr><td class="td_name_double">Unmotorized traffic</td><td class="td_data_double"><span id="mean_unmotorized_night">dummie</span></td></tr>
+					<tr><td class="td_name_first">Cars</td><td class="td_data_first"><span id="traffic_night">dummie</span></td></tr>
+					<tr><td class="td_name">Trucks</td><td class="td_data_car"><span id="truck_night">dummie</span></td></tr>
+					<tr><td class="td_name">Vans</td><td class="td_data_car"><span id="van_night">dummie</span></td></tr>
+					<tr><td class="td_name">Motorbikes</td><td class="td_data_car"><span id="motorbike_night">dummie</span></td></tr>
+					<tr><td class="td_name">Busses</td><td class="td_data_car"><span id="bus_night">dummie</span></td></tr>
+					<tr><td class="td_name_double">Motorized traffic</td><td class="td_data_double"><span id="mean_motorized_night">dummie</span></td></tr>
+				</tbody>
+			</table>
 
-				</p>
-			</div>
+			</p>
+		</div>
 
-		</form>
+	</form>
 
 <div id="map"></div>
 
@@ -109,10 +109,10 @@ Project supervisor: Björn Stockleben</p>
 	//	});
 
 	var map = new google.maps.Map(document.getElementById('map'), {
-//		center: new google.maps.LatLng(52.5377, 13.4281), //good value for seeing both streets
+		//		center: new google.maps.LatLng(52.5377, 13.4281), //good value for seeing both streets
 		center: new google.maps.LatLng(52.5400, 13.4129), // Schönhauser Allee 42
-				zoom: 17, // (good for one street)
-//		zoom: 15, // good for an overview
+		zoom: 17, // (good for one street)
+		//		zoom: 15, // good for an overview
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		overviewMapControl: true,
 		overviewMapControlOptions: {
@@ -152,10 +152,10 @@ Project supervisor: Björn Stockleben</p>
 
 		//  CREATE COLOR SCALE FOR DATAPOINTS
 
-		
+
 		var cars = function(d) {return +d.car_night}; //fucking "+" before "d" is necessary to handle the output as a number (not a string)
 		var busses = function(d) {return +d.bus_night};
-		
+
 		var traffic_min = d3.min(data, cars);
 		console.log("car_min: " + traffic_min);
 
@@ -176,7 +176,7 @@ Project supervisor: Björn Stockleben</p>
 		.domain([bus_min,bus_max])
 		.range(["green","red"]); // yellowgreen/red
 
-		
+
 
 		//    CREATE OVERLAY FOR GOOGLE MAPS
 
@@ -193,7 +193,6 @@ Project supervisor: Björn Stockleben</p>
 			overlay.draw = function() {
 				var projection = this.getProjection()
 				var padding = 10;
-				var radius = 10;
 
 				//    var test = layer.selectAll("svg").data(data);
 				//    console.log("test "+test);
@@ -208,25 +207,6 @@ Project supervisor: Björn Stockleben</p>
 				.style("width", 29)
 				.style("opacity", 0.9);
 
-				//				// Add a circle.
-				//				marker.append("svg:circle")
-				//				//          .attr("r", function(d) {return d.height*1.1;})
-				//				.attr("r", radius)
-				//				.attr("cx", padding)
-				//				.attr("cy", padding)
-				//				.attr("class", "circle")
-				//				// .on("click", function(){alert("test")}) // toDo: make markers clickable
-				//				.style("fill", function(d) {return eei_scale(d.cars);});
-
-				//				marker.append("svg:rect")
-				//				.attr("x", 0)
-				//				.attr("y", 0)
-				//				//				.attr("rx", 3)
-				//				//				.attr("ry", 3)
-				//				.attr("width", 15)
-				//				.attr("height", 15)
-				//				.style("fill", function(d) {return eei_scale(d.cars);});
-
 				var tooltip_traffic = d3.select("body").append("div")
 				.attr("class", "tooltip_traffic");
 
@@ -237,29 +217,29 @@ Project supervisor: Björn Stockleben</p>
 				.style("stroke-width", 2)
 				//				.style("stroke", "steelblue")
 				.style("fill", function(d) {return traffic_scale(d.car_night);})
-//				.style("fill", "white")
+				//				.style("fill", "white")
 
 				.on("mouseover", function(d) {
-								tooltip_traffic.html(d)
-								//          d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
+					tooltip_traffic.html(d)
+					//          d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
 
-								d3.select("#tooltip_traffic").select("#lat").text(d.lat)
-								d3.select("#tooltip_traffic").select("#lon").text(d.lon)
-								d3.select("#tooltip_traffic").select("#streetname").text(d.streetname)
-								d3.select("#tooltip_traffic").select("#pedestrian_night").text(d3.round(d.pedestrian_night))
-								d3.select("#tooltip_traffic").select("#bike_night").text(d3.round(d.bike_night))
-								d3.select("#tooltip_traffic").select("#mean_unmotorized_night").text(d3.round(d.mean_unmotorized_night))
-								d3.select("#tooltip_traffic").select("#traffic_night").text(d3.round(d.car_night))
-								d3.select("#tooltip_traffic").select("#truck_night").text(d3.round(d.truck_night))
-								d3.select("#tooltip_traffic").select("#van_night").text(d3.round(d.van_night))
-								d3.select("#tooltip_traffic").select("#motorbike_night").text(d3.round(d.motorbike_night))
-								d3.select("#tooltip_traffic").select("#bus_night").text(d3.round(d.bus_night))
-								d3.select("#tooltip_traffic").select("#mean_motorized_night").text(d3.round(d.mean_motorized_night))
-								d3.select("#tooltip_traffic").classed("hidden", false).transition().duration(500)
-								//          d3.select("#tooltip_traffic").style("opacity", 0).delay(100)
-								//          d3.select("#tooltip_traffic").transition().duration(1000).style("opacity", 1)
-								;
-							})
+					d3.select("#tooltip_traffic").select("#lat").text(d.lat)
+					d3.select("#tooltip_traffic").select("#lon").text(d.lon)
+					d3.select("#tooltip_traffic").select("#streetname").text(d.streetname)
+					d3.select("#tooltip_traffic").select("#pedestrian_night").text(d3.round(d.pedestrian_night))
+					d3.select("#tooltip_traffic").select("#bike_night").text(d3.round(d.bike_night))
+					d3.select("#tooltip_traffic").select("#mean_unmotorized_night").text(d3.round(d.mean_unmotorized_night))
+					d3.select("#tooltip_traffic").select("#traffic_night").text(d3.round(d.car_night))
+					d3.select("#tooltip_traffic").select("#truck_night").text(d3.round(d.truck_night))
+					d3.select("#tooltip_traffic").select("#van_night").text(d3.round(d.van_night))
+					d3.select("#tooltip_traffic").select("#motorbike_night").text(d3.round(d.motorbike_night))
+					d3.select("#tooltip_traffic").select("#bus_night").text(d3.round(d.bus_night))
+					d3.select("#tooltip_traffic").select("#mean_motorized_night").text(d3.round(d.mean_motorized_night))
+					d3.select("#tooltip_traffic").classed("hidden", false).transition().duration(500)
+					//          d3.select("#tooltip_traffic").style("opacity", 0).delay(100)
+					//          d3.select("#tooltip_traffic").transition().duration(1000).style("opacity", 1)
+					;
+				})
 
 				.on("mouseout", function() {
 					//					d3.select(this).classed("circleHighlighted", false).transition().duration(500);
@@ -290,7 +270,7 @@ Project supervisor: Björn Stockleben</p>
 		overlay.setMap(map);
 	});
 
-	
+
 	//  IMPORT DATA FOR SCHOENHAUSER ALLEE FROM EXTERNAL FILE
 
 	var importFunction3 = d3.dsv(";","text/csv");
@@ -315,18 +295,24 @@ Project supervisor: Björn Stockleben</p>
 		.domain([eei_min,eei_max])
 		.range(["#d8ef00","#ff6200"]); // yellowgreen/red
 
-		var lumen_min = d3.min(data, lumens);
-		console.log("lumen_min: " + lumen_min);
-		var lumen_max = d3.max(data, lumens);
-		console.log("lumen_max: " + lumen_max);
-		var lumen_scale = d3.scale.linear()
-		.domain([lumen_max, lumen_min])
-		.range([0.7, 1]);
-
 		var watt_min = d3.min(data, watts);
 		console.log("watt_min: " + watt_min);
 		var watt_max = d3.max(data, watts);
 		console.log("watt_max: " + watt_max);
+		var watt_radius_scale = d3.scale.linear()
+		.domain([watt_max, watt_min])
+		.range([10, 20]); //used for radius of outer circle
+
+		var lumen_min = d3.min(data, lumens);
+		console.log("lumen_min: " + lumen_min);
+		var lumen_max = d3.max(data, lumens);
+		console.log("lumen_max: " + lumen_max);
+		var lumen_color_scale = d3.scale.linear()
+		.domain([lumen_max, lumen_min])
+		.range([0.7, 1]);
+		var lumen_radius_scale = d3.scale.linear()
+		.domain([lumen_max, lumen_min])
+		.range([3, 10]); // used for radius of inner circle
 
 		var consumption_min = d3.min(data, consumptions);
 		console.log("consumption_min: " + consumption_min);
@@ -374,59 +360,38 @@ Project supervisor: Björn Stockleben</p>
 				//				.style("height", 25)
 				//				.style("width", 20)
 				.style("fill", "blue")
-//				.style("fill-opacitiy", ".5")
+				//				.style("fill-opacitiy", ".5")
 
 
 				var tooltip_light = d3.select("body").append("div")
 				.attr("class", "tooltip_light");
 
-//				var ee = function(d) {
-////					 console.log("ee: " + d.energy_efficiency);
-//					if (d.energy_efficiency == "A") {
-//						console.log("yeah!");
-//						return
-//						marker.append("svg:rect")
-//						.attr("x", 30.335)
-//						.attr("y", 66.791)
-//						.attr("height", 13.331)
-//						.attr("width", 18.705)
-//						.style("fill", "white")
-//						.style("stroke", function(d) {return eei_scale(d.lumen/d.watt);})
-//					};
-//					if (d.energy_efficiency == "A+") {
-//						console.log("yeah+!");
-//						return
-//						marker.append("svg:rect")
-//						.attr("x", 30.335)
-//						.attr("y", 66.791)
-//						.attr("height", 13.331)
-//						.attr("width", 18.705)
-//						.style("fill", "black")
-//						.style("stroke", function(d) {return eei_scale(d.lumen/d.watt);})
-//					};
-////					else return d.energy_efficiency;
-//				}
+				var radius_outer = function(d) {return watt_radius_scale(d.watt);}; //smallest value should be 10; input 50-250
+				var radius_inner = function(d) {return lumen_radius_scale(d.lumen);}; //smallest value should be 3; input 4000-33000
 
-//				FIXME: HOW TO CALL THE MARKERS?
-//				var nice = function(d) {return ee; console.log("möp");};
-//				marker.append("svg:rect")
-//				d3.select(this)
-//				.text(d.name_lamp);
-
-				marker.append("svg:polygon") // bulb foot
-				.attr("points", "7.472,19.17 15.042,19.17 15.042,21.781 13.082,21.781 13.103,27.111 9.425,27.111 9.433,21.781 7.472,21.781")
-				.style("fill", "#9C9696")
-				.style("fill-opacity", .4)
-				.style("stroke-width", 2)
-				.style("stroke-opacity", .43)
+				// Add a circle.
+				marker.append("svg:circle")
+				.attr("r", radius_outer)
+				//				.attr("r", 15)
+				.attr("cx", radius_outer)
+				.attr("cy", radius_outer)
+				.attr("class", "circle")
+				//				.style("fill", function(d) {return eei_scale(d.eei);})
+				.style("fill", "white")
+				//				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
+				.style("fill-opacity", .8)
+				.style("stroke-width", 1)
+				.style("stroke-opacity", .7)
 				.style("stroke", "#9C9696")
 
-				
-				marker.append("svg:path") // bulb head
-				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
+				marker.append("svg:circle")
+				.attr("r", radius_inner)
+				.attr("cx", radius_outer)
+				.attr("cy", radius_outer)
+				.attr("class", "circle")
 				.style("fill", function(d) {return eei_scale(d.eei);})
-				.style("fill-opacity", function(d) {return lumen_scale(d.lumen);})
-//				.style("fill-opacity", .2)
+				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
+				//				.style("fill-opacity", .2)
 				.style("stroke-width", 1)
 				.style("stroke-opacity", .7)
 				.style("stroke", "#9C9696")
@@ -459,12 +424,24 @@ Project supervisor: Björn Stockleben</p>
 					;
 				})
 
-// 				marker.append("svg:path") // bulb head double for the nice shine
-//				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
-//				.style("fill-opacity", 0)
-//				.style("stroke-width", 8)
-//				.style("stroke-opacity", .43)
-//				.style("stroke", function(d) {return eei_scale(d.lumen/d.watt);})
+				//				marker.append("svg:rect")
+				//				.attr("x", 0)
+				//				.attr("y", 0)
+				//				//				.attr("rx", 3)
+				//				//				.attr("ry", 3)
+				//				.attr("width", 15)
+				//				.attr("height", 15)
+				//				.style("fill", function(d) {return eei_scale(d.cars);});
+
+				//				marker.append("svg:path") // bulb head
+				//				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
+
+				// 				marker.append("svg:path") // bulb head double for the nice shine
+				//				.attr("d", "M11.257,5.611c-4.09,0-7.407,3.697-7.407,8.26 c0,3.154,1.477,5.896,3.809,7.287h7.255c2.299-1.4,3.749-4.16,3.749-7.287C18.664,9.311,15.347,5.611,11.257,5.611z")
+				//				.style("fill-opacity", 0)
+				//				.style("stroke-width", 8)
+				//				.style("stroke-opacity", .43)
+				//				.style("stroke", function(d) {return eei_scale(d.lumen/d.watt);})
 
 				marker.append("svg:path")// "A"" or "A+"?
 				.attr("d",  function (d) {
