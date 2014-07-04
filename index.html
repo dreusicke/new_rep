@@ -300,7 +300,7 @@
 		var watt_max = d3.max(data, watts);
 		console.log("watt_max: " + watt_max);
 		var watt_radius_scale = d3.scale.linear()
-		.domain([watt_max, watt_min])
+		.domain([watt_min, watt_max])
 		.range([10, 20]); //used for radius of outer circle
 
 		var lumen_min = d3.min(data, lumens);
@@ -308,11 +308,11 @@
 		var lumen_max = d3.max(data, lumens);
 		console.log("lumen_max: " + lumen_max);
 		var lumen_color_scale = d3.scale.linear()
-		.domain([lumen_max, lumen_min])
-		.range([0.7, 1]);
+		.domain([lumen_min, lumen_max])
+		.range(["#d8ef00","#ff6200"]);
 		var lumen_radius_scale = d3.scale.linear()
-		.domain([lumen_max, lumen_min])
-		.range([3, 10]); // used for radius of inner circle
+		.domain([lumen_min, lumen_max])
+		.range([4, 15]); // used for radius of inner circle
 
 		var consumption_min = d3.min(data, consumptions);
 		console.log("consumption_min: " + consumption_min);
