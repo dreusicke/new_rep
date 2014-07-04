@@ -126,7 +126,15 @@
 				padding-right: .5em;
 			}
 
-			.td_data {
+			.td_data_light {
+				color: #fff;
+				text-align: left;
+				border-bottom: 1px dotted #888;
+				padding-right: .5em;
+			}
+
+			.td_data_car {
+				color: #fff;
 				text-align: right;
 				border-bottom: 1px dotted #888;
 				padding-right: .5em;
@@ -145,6 +153,7 @@
 			}
 
 			.td_name_double {
+				color: #fff;
 				text-align: left;
 				border-bottom: 3px double #888;
 				padding: 1em .5em 0 0;
@@ -158,6 +167,11 @@
 				margin-bottom: .5px;
 			}
 
+			#eei_range, #lumen_range, #watt_range, #consumption_range, #efficiency_range, #car_range, #bus_range {
+				font-size: smaller;
+				color: #aaa;
+				text-align: right;
+			}
 
 
 
