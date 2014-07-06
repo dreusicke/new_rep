@@ -9,30 +9,50 @@
 		<link rel="stylesheet" type="text/css" href="css.css">
 		<script>
 
-			$(document).ready(function(){
-				$("button").click(function(){
-					$(".story").stop().slideToggle(300);
+			$(function(){
+				$("#story_button").click(function(){
+					$("#story").stop().slideToggle(200);
+					return false;
 				});
 			});
+
+			$(function(){
+				$("#watt_button").click(function(){
+					$(".outer_circle").stop().slideToggle(500);
+				});
+			});
+
+			$(function(){
+				$("#traffic_button").click(function(){
+					$(".traffic_rect").stop().hide();
+				});
+			});
+
+			$(function(){
+				$("#lumen_button").click(function(){
+					$(".inner_circle").stop().hide();
+				});
+			});
+
 
 		</script>
 	</head>
 
 	<body>
-		<button>Story</button>
-		<div class="story">
+		<div>
 			<h1>„Sense my city“ - LIGHTeSCAPE</h1>
-			<h3>Streetlights and traffic in Prenzlauer Allee and Schönhauser Allee, Berlin</h3>
-			<p>„Sense my city“ is an international project of the University of Applied Sciences Magdeburg-Stendal, M.A. Crossmedia, in cooperation with University of Maribor. Summer term 2014.<br />
+			<h3 >Streetlights and traffic in Prenzlauer Allee and Schönhauser Allee, Berlin</h3>
+			<button id="story_button">Project members and details</button>
+			<p id="story" class="hidden">„Sense my city“ is an international project of the University of Applied Sciences Magdeburg-Stendal, M.A. Crossmedia, in cooperation with University of Maribor. Summer term 2014.<br />
 				Students: Michael Dreusicke, Nadine Mollenhauer, Maria Rieger, Viktoria Schult, Laura Schulz, Alexandra Seegerer, Katrin Wildt.<br />
 				Team leaders: Anne Koslowski, Mileen Mollenhauer.<br />
 				Project supervisor: Björn Stockleben</p>
 		</div>
 		<form class="button">
+			<button id="lumen_button">Lumen of lights</button>
+			<button id="watt_button">Watt of lights</button>
+			<button id="traffic_button">Traffic of pedestrians</button>
 
-			<input type="button" value="Lights: Lumen" class="button" onClick="">
-			<input type="button" value="Lights: Watt" class="button" onClick="cars">
-			<input type="button" value="Traffic" class="button">
 			<div id="tooltip_light" class="hidden">
 				<p class="infobox">
 				<table>
@@ -79,18 +99,8 @@
 
 <div id="map"></div>
 
-<h3>Nächste Visualisierung</h3>
-<p>Hier leiten wir über zur nächsten Visualisierung mit einigem Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text . </p>
-</div>
-
-
-
-
 <script type="text/javascript">
 
-	$("button").click(function(){
-		$(".story").hide(1000);
-	});
 
 	//      CREATE GOOGLE MAP
 	//	var map = new google.maps.Map(document.getElementById('map'), {
@@ -235,6 +245,7 @@
 				.attr("y", padding)
 				.attr("width", width)
 				.attr("height", height)
+				.attr("class", "traffic_rect")
 				.attr("transform", "translate(-8, -8)") 
 				.style("fill", function(d) {return pedestrian_scale(d.pedestrian_night);})
 				.style("stroke", function(d) {return pedestrian_scale(d.pedestrian_night);})
@@ -383,7 +394,7 @@
 				.attr("r", radius_outer)
 				.attr("cx", radius_outer)
 				.attr("cy", radius_outer)
-				.attr("class", "circle")
+				.attr("class", "outer_circle")
 				//				.style("fill", function(d) {return eei_scale(d.eei);})
 				.style("fill", "white")
 				//				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
@@ -396,7 +407,7 @@
 				.attr("r", radius_inner)
 				.attr("cx", radius_outer)
 				.attr("cy", radius_outer)
-				.attr("class", "circle")
+				.attr("class", "inner_circle")
 				.style("fill", function(d) {return eei_scale(d.eei);})
 				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
 				//				.style("fill-opacity", .2)
