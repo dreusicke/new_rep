@@ -153,7 +153,7 @@
 		//  CREATE COLOR SCALE FOR DATAPOINTS
 
 
-		var cars = function(d) {return +d.car_night}; //fucking "+" before "d" is necessary to handle the output as a number (not a string)
+		var cars = function(d) {return +d.car_night}; //f...ing "+" before "d" is necessary to handle the output as a number (not a string)
 		var busses = function(d) {return +d.bus_night};
 
 		var traffic_min = d3.min(data, cars);
@@ -347,34 +347,25 @@
 
 				var radius = function(d) {return d.lumen/10000+3;}; 
 
+				var radius_outer = function(d) {return Math.sqrt(watt_radius_scale(d.watt));}; //smallest value should be 10; input 50-250; squareroot of value for radius to use area instead of actual radius
+				var radius_inner = function(d) {return Math.sqrt(lumen_radius_scale(d.lumen));}; //smallest value should be 3; input 4000-33000
+
 				var marker = layer.selectAll("svg")
 				.data(data)
 				.each(transform) // update existing markers
 				.enter().append("svg:svg")
 				.each(transform)
 				.attr("class", "marker")
-				//				.style("height", function(d) {return (d.lumen/10000+3)*4;})
-				//				.style("width", function(d) {return (d.lumen/10000+3)*4;});
-				.style("height", function(d){return radius_outer})
-				.style("width", function(d){return radius_outer})
-				//				.style("height", 25)
-				//				.style("width", 20)
-				//				.style("fill", "blue")
-				//				.style("fill-opacitiy", ".5")
+				.style("height", function(d) {return Math.sqrt(watt_radius_scale(d.watt))*2;}) // height = radius*2
+				.style("width", function(d) {return Math.sqrt(watt_radius_scale(d.watt))*2;});
 
 
 				var tooltip_light = d3.select("body").append("div")
 				.attr("class", "tooltip_light");
 
-				var radius_outer = function(d) {return Math.sqrt(watt_radius_scale(d.watt));}; //smallest value should be 10; input 50-250; squareroot of value for radius to use area instead of actual radius
-				//				var radius_outer = function(d) {return watt_radius_scale(d.watt);}; //smallest value should be 10; input 50-250
-				//				var radius_inner = function(d) {return lumen_radius_scale(d.lumen);}; //smallest value should be 3; input 4000-33000
-				var radius_inner = function(d) {return Math.sqrt(lumen_radius_scale(d.lumen));}; //smallest value should be 3; input 4000-33000
-
 				// Outer circle.
 				marker.append("svg:circle")
 				.attr("r", radius_outer)
-				//				.attr("r", 15)
 				.attr("cx", radius_outer)
 				.attr("cy", radius_outer)
 				.attr("class", "circle")
@@ -383,7 +374,7 @@
 				//				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
 				.style("fill-opacity", .7)
 				.style("stroke-width", 1)
-				.attr("transform", "translate(-radius_outer/2, -radius_outer/2)")
+				//				.attr("transform", "translate(-radius_outer/2, -radius_outer/2)")
 
 				// Inner circle.
 				marker.append("svg:circle")
@@ -399,7 +390,7 @@
 
 				.on("mouseover", function(d) {
 					tooltip_light.html(d)
-					d3.select(this).attr("class", "circleHighlighted")//.transition().duration(100)
+					.attr("class", "circleHighlighted")//.transition().duration(100)
 					d3.select("#tooltip_light").select("#name_lamp").text(d.name_lamp)
 					d3.select("#tooltip_light").select("#installed").text(d.installed)
 					d3.select("#tooltip_light").select("#bulb").text(d.bulb)

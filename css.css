@@ -41,8 +41,8 @@ p {
 }
 
 .datapoints svg {
-	width:  3em; /*only fallback values*/
-	height: 3em; /*only fallback values*/
+	width:  3em; /*only fallback value, since height and width are set dynamically*/
+	height: 3em; /*only fallback value*/
 	cursor: pointer;
 }
 
