@@ -141,129 +141,135 @@
 
 
 
-//  TRAFFIC VISUALIZATION
+	//  TRAFFIC VISUALIZATION
 
 
-  //  IMPORT DATA FOR TRAFFIC FROM EXTERNAL FILE
+	//  IMPORT DATA FOR TRAFFIC FROM EXTERNAL FILE
 
-  var importFunction1 = d3.dsv(";","text/csv");
+	var importFunction1 = d3.dsv(";","text/csv");
 
-  //  Load the station data. When the data comes back, create an overlay.
-  importFunction1("mobility_night.csv", function(data) {
+	//  Load the station data. When the data comes back, create an overlay.
+	importFunction1("mobility_night.csv", function(data) {
 
-    //  CREATE COLOR SCALE FOR DATAPOINTS
+		//  CREATE COLOR SCALE FOR DATAPOINTS
 
-    
-    var cars = function(d) {return +d.car_night}; //fucking "+" before "d" is necessary to handle the output as a number (not a string)
-    var pedestrians = function(d) {return +d.pedestrian_night};
-    
-    var traffic_min = d3.min(data, cars);
-    //console.log("car_min: " + traffic_min);
 
-    var traffic_max = d3.max(data, cars);
-    //console.log("car_max: " + traffic_max);
+		var cars = function(d) {return +d.car_night}; //fucking "+" before "d" is necessary to handle the output as a number (not a string)
+		var pedestrians = function(d) {return +d.pedestrian_night};
 
-    var traffic_scale = d3.scale.linear()
-    .domain([traffic_min,traffic_max])
-    .range(["lightblue", "blue"]);
-    //.range(["#b2fd07","#ff6200"]); // yellowgreen/red
+		var traffic_min = d3.min(data, cars);
+		//console.log("car_min: " + traffic_min);
 
-    var pedestrian_min = d3.min(data, pedestrians);
-    console.log("pedestrian_min: " + pedestrian_min);
+		var traffic_max = d3.max(data, cars);
+		//console.log("car_max: " + traffic_max);
 
-    var pedestrian_max = d3.max(data, pedestrians);
-    console.log("pedestrian_max: " + pedestrian_max);
+		var traffic_scale = d3.scale.linear()
+		.domain([traffic_min,traffic_max])
+		.range(["lightblue", "blue"]);
+		//.range(["#b2fd07","#ff6200"]); // yellowgreen/red
 
-    var pedestrian_scale = d3.scale.linear()
-    .domain([pedestrian_min,pedestrian_max])
-    .range(["lightblue", "blue"]);
-    //.range(["green","red"]); // yellowgreen/red
+		var pedestrian_min = d3.min(data, pedestrians);
+		console.log("pedestrian_min: " + pedestrian_min);
 
-    
+		var pedestrian_max = d3.max(data, pedestrians);
+		console.log("pedestrian_max: " + pedestrian_max);
 
-    //    CREATE OVERLAY FOR GOOGLE MAPS
+		var pedestrian_scale = d3.scale.linear()
+		.domain([pedestrian_min,pedestrian_max])
+		.range(["lightblue", "blue"]);
+		//.range(["green","red"]); // yellowgreen/red
 
-    var overlay = new google.maps.OverlayView();
 
-    // Add the container when the overlay is added to the map.
-    overlay.onAdd = function() {
-      var layer = d3.select(this.getPanes().overlayMouseTarget).append("div")
-      .attr("class", "datapoints");
 
-      //    DRAW DATAPOINTS FOR TRAFFIC WITH SVG
+		//    CREATE OVERLAY FOR GOOGLE MAPS
 
-      // Draw each marker as a separate SVG element. We could use a single SVG, but what size would it have?
-      overlay.draw = function() {
-        var projection = this.getProjection()
-        var padding = 10;
+		var overlay = new google.maps.OverlayView();
 
-        var marker = layer.selectAll("svg")
-        .data(data)
-        .each(transform) // update existing markers
-        .enter().append("svg:svg")
-        .each(transform)
-        .attr("class", "marker")
-        .style("height", 18)
-        .style("width", 18)
-        //.style("opacity", 0.9);
+		// Add the container when the overlay is added to the map.
+		overlay.onAdd = function() {
+			var layer = d3.select(this.getPanes().overlayMouseTarget).append("div")
+			.attr("class", "datapoints");
 
-        var tooltip_traffic = d3.select("body").append("div")
-        .attr("class", "tooltip_traffic")
+			//    DRAW DATAPOINTS FOR TRAFFIC WITH SVG
 
-        
-        // var width_rect = function(d) {return (d.car_night/100 +5);}
-        // var height_rect = function(d) {return (d.car_night/100 +5);}
-        // DRAW RECTANGLES
-        marker.append("svg:rect")
-        .attr("x", padding)
-        .attr("y", padding)
-        .attr("width", 16) 
-        .attr("height", 16)
-        .attr("transform", "translate(-8, -8)") 
-        .style("fill", function(d) {return pedestrian_scale(d.pedestrian_night);})
-        //.style("fill", function(d) {return traffic_scale(d.car_night);})
-      
-        .on("mouseover", function(d) {
-          // tooltip_traffic.html(d)
-          //          d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
-          d3.select(this).style("fill", "white").transition().duration(1000)
-          d3.select("#tooltip_traffic").select("#pedestrian_night").text(d3.round(d.pedestrian_night))
-          d3.select("#tooltip_traffic").select("#bike_night").text(d3.round(d.bike_night))
-          d3.select("#tooltip_traffic").select("#mean_unmotorized_night").text(d3.round(d.mean_unmotorized_night))
-          d3.select("#tooltip_traffic").select("#traffic_night").text(d3.round(d.car_night))
-          d3.select("#tooltip_traffic").select("#truck_night").text(d3.round(d.truck_night))
-          d3.select("#tooltip_traffic").select("#van_night").text(d3.round(d.van_night))
-          d3.select("#tooltip_traffic").select("#motorbike_night").text(d3.round(d.motorbike_night))
-          d3.select("#tooltip_traffic").select("#bus_night").text(d3.round(d.bus_night))
-          d3.select("#tooltip_traffic").select("#mean_motorized_night").text(d3.round(d.mean_motorized_night))
-          d3.select("#tooltip_traffic").classed("hidden", false).transition().duration(500)
-          //          d3.select("#tooltip_traffic").style("opacity", 0).delay(100)
-          //          d3.select("#tooltip_traffic").transition().duration(1000).style("opacity", 1)
-          ;
-        })
+			// Draw each marker as a separate SVG element. We could use a single SVG, but what size would it have?
+			overlay.draw = function() {
+				var projection = this.getProjection()
+				var padding = 10;
+				var height = 18;
+				var width = 18;
+				var hover = 4;
 
-        .on("mouseout", function() {
-          //          d3.select(this).classed("circleHighlighted", false).transition().duration(500);
-          //          d3.select("#tooltip_traffic").style("opacity", 0).transition().duration(500)
-          d3.select(this).style("fill", function(d) {return traffic_scale(d.car_night);}).transition().duration(500)
-          d3.select("#tooltip_traffic").classed("hidden", true)
-          ;
-        })
+				var marker = layer.selectAll("svg")
+				.data(data)
+				.each(transform) // update existing markers
+				.enter().append("svg:svg")
+				.each(transform)
+				.attr("class", "marker")
+				.style("height", function(d){return height + hover})
+				.style("width", function(d){return width + hover})
+				//.style("opacity", 0.9);
 
-        function transform(d) {
-          //          console.log("d "+d);
-          data_point = new google.maps.LatLng(d.lat, d.lon);
-          data_point_projected = projection.fromLatLngToDivPixel(data_point);
-          return d3.select(this)
-          .style("left", (data_point_projected.x - padding) + "px")
-          .style("top", (data_point_projected.y - padding) + "px");
-        }
-      };
-    };
+				var tooltip_traffic = d3.select("body").append("div")
+				.attr("class", "tooltip_traffic")
 
-    // Bind our overlay to the map…
-    overlay.setMap(map);
-  });
+
+				// var width_rect = function(d) {return (d.car_night/100 +5);}
+				// var height_rect = function(d) {return (d.car_night/100 +5);}
+				// DRAW RECTANGLES
+				marker.append("svg:rect")
+				.attr("x", padding)
+				.attr("y", padding)
+				.attr("width", width)
+				.attr("height", height)
+				.attr("transform", "translate(-8, -8)") 
+				.style("fill", function(d) {return pedestrian_scale(d.pedestrian_night);})
+				.style("stroke", function(d) {return pedestrian_scale(d.pedestrian_night);})
+				//.style("fill", function(d) {return traffic_scale(d.car_night);})
+				.style("stroke-width", "0")
+				.style("stroke-opacity", ".7")
+
+				.on("mouseover", function(d) {
+					// tooltip_traffic.html(d)
+					//          d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
+					d3.select(this).style("stroke-width", hover).transition().duration(100)
+					d3.select("#tooltip_traffic").select("#pedestrian_night").text(d3.round(d.pedestrian_night))
+					d3.select("#tooltip_traffic").select("#bike_night").text(d3.round(d.bike_night))
+					d3.select("#tooltip_traffic").select("#mean_unmotorized_night").text(d3.round(d.mean_unmotorized_night))
+					d3.select("#tooltip_traffic").select("#traffic_night").text(d3.round(d.car_night))
+					d3.select("#tooltip_traffic").select("#truck_night").text(d3.round(d.truck_night))
+					d3.select("#tooltip_traffic").select("#van_night").text(d3.round(d.van_night))
+					d3.select("#tooltip_traffic").select("#motorbike_night").text(d3.round(d.motorbike_night))
+					d3.select("#tooltip_traffic").select("#bus_night").text(d3.round(d.bus_night))
+					d3.select("#tooltip_traffic").select("#mean_motorized_night").text(d3.round(d.mean_motorized_night))
+					d3.select("#tooltip_traffic").classed("hidden", false).transition().duration(500)
+					//          d3.select("#tooltip_traffic").style("opacity", 0).delay(100)
+					//          d3.select("#tooltip_traffic").transition().duration(1000).style("opacity", 1)
+					;
+				})
+
+				.on("mouseout", function() {
+					//          d3.select(this).classed("circleHighlighted", false).transition().duration(500);
+					//          d3.select("#tooltip_traffic").style("opacity", 0).transition().duration(500)
+					d3.select(this).style("stroke-width", "0").transition().duration(500)
+					d3.select("#tooltip_traffic").classed("hidden", true)
+					;
+				})
+
+				function transform(d) {
+					//          console.log("d "+d);
+					data_point = new google.maps.LatLng(d.lat, d.lon);
+					data_point_projected = projection.fromLatLngToDivPixel(data_point);
+					return d3.select(this)
+					.style("left", (data_point_projected.x - padding) + "px")
+					.style("top", (data_point_projected.y - padding) + "px");
+				}
+			};
+		};
+
+		// Bind our overlay to the map…
+		overlay.setMap(map);
+	});
 
 
 	//  IMPORT DATA FOR SCHOENHAUSER ALLEE FROM EXTERNAL FILE
