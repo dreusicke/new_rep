@@ -137,10 +137,10 @@
 	//	});
 
 	var map = new google.maps.Map(document.getElementById('map'), {
-		//		center: new google.maps.LatLng(52.5377, 13.4281), //good value for seeing both streets
-		center: new google.maps.LatLng(52.5400, 13.4129), // Schönhauser Allee 42
-		zoom: 17, // (good for one street)
-		//		zoom: 15, // good for an overview
+		center: new google.maps.LatLng(52.5377, 13.4281), //good value for seeing both streets
+		//		center: new google.maps.LatLng(52.5400, 13.4129), // Schönhauser Allee 42
+		//		zoom: 17, // (good for one street)
+		zoom: 15, // good for an overview
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		overviewMapControl: true,
 		overviewMapControlOptions: {
@@ -195,7 +195,7 @@
 		console.log("pedestrian_max: " + pedestrian_max);
 		var pedestrian_scale = d3.scale.linear()
 		.domain([pedestrian_min, pedestrian_max])
-		.range(["lightblue", "blue"]);
+		.range(["lightblue", "#0054f4"]);
 		//.range(["green","red"]); // yellowgreen/red
 
 		var bike_min = d3.min(data, bikes);
@@ -266,7 +266,7 @@
 				.style("width", function(d){return width + hover})
 				//.style("opacity", 0.9);
 
-//				var svg_element = d3.select(document.createElement("svg:rect")); // attempt to create dom elements (failed); FIXME
+				//				var svg_element = d3.select(document.createElement("svg:rect")); // attempt to create dom elements (failed); FIXME
 
 				var tooltip_traffic = d3.select("body").append("div")
 				.attr("class", "tooltip_traffic");
@@ -360,7 +360,7 @@
 
 		var eei_scale = d3.scale.linear()
 		.domain([eei_min,eei_max])
-		.range(["#d8ef00","#ff6200"]); // yellowgreen/red
+		.range(["#baff00","#ff009d"]); // yellowgreen/red
 
 		var watt_min = d3.min(data, watts);
 		console.log("watt_min: " + watt_min);
@@ -440,7 +440,7 @@
 				//				.style("fill", function(d) {return eei_scale(d.eei);})
 				.style("fill", "white")
 				//				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
-				.style("fill-opacity", .7)
+				.style("fill-opacity", .5)
 				.style("stroke-width", 1)
 				//				.attr("transform", "translate(" + -10 + "," + -5 + ")");
 
@@ -452,7 +452,7 @@
 				.attr("class", "inner_circle")
 				.style("fill", function(d) {return eei_scale(d.eei);})
 				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
-				//				.style("fill-opacity", .2)
+				.style("fill-opacity", .5)
 				.style("stroke-width", 1)
 				.style("stroke", "#3b3939")
 
