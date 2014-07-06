@@ -345,7 +345,7 @@
 				//    var test = layer.selectAll("svg").data(data);
 				//    console.log("test "+test);
 
-				var radius = function(d) {return d.lumen/10000+3;}; 
+				//				var radius = function(d) {return d.lumen/10000+3;}; 
 
 				var radius_outer = function(d) {return Math.sqrt(watt_radius_scale(d.watt));}; //smallest value should be 10; input 50-250; squareroot of value for radius to use area instead of actual radius
 				var radius_inner = function(d) {return Math.sqrt(lumen_radius_scale(d.lumen));}; //smallest value should be 3; input 4000-33000
@@ -389,8 +389,8 @@
 				.style("stroke", "#3b3939")
 
 				.on("mouseover", function(d) {
-					tooltip_light.html(d)
-					.attr("class", "circleHighlighted")//.transition().duration(100)
+					//					tooltip_light.html(d)
+					d3.select(this).style("stroke", "#68cfff").transition().duration(1000)
 					d3.select("#tooltip_light").select("#name_lamp").text(d.name_lamp)
 					d3.select("#tooltip_light").select("#installed").text(d.installed)
 					d3.select("#tooltip_light").select("#bulb").text(d.bulb)
@@ -406,12 +406,12 @@
 					d3.select("#tooltip_light").select("#energy_efficiency").text(d.energy_efficiency)
 					d3.select("#tooltip_light").select("#efficiency_range").text(" (r = " + efficiency_min + " to " + efficiency_max + ")" )
 					d3.select("#tooltip_light").select("#powered").text("From 9.46pm to 4.34am")
-					d3.select("#tooltip_light").classed("hidden", false).transition().duration(500)
+					d3.select("#tooltip_light").classed("hidden", false).transition().duration(5000)
 					;
 				})
 
 				.on("mouseout", function() {
-					//					d3.select(this).classed("circleHighlighted", false).transition().duration(500);
+					d3.select(this).style("stroke", "#3b3939").transition().duration(500);
 					d3.select("#tooltip_light").classed("hidden", true)
 					;
 				})

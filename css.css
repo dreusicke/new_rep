@@ -51,8 +51,8 @@ p {
 
 .circleHighlighted {
 	stroke: #fff;
-	stroke-width: 30;
-	fill: #fff;
+	stroke-width: 10;
+	fill: #f00;
 	fill-opacity: 1;
 }
 
