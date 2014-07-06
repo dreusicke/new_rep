@@ -7,10 +7,20 @@
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css.css">
+		<script>
+
+			$(document).ready(function(){
+				$("button").click(function(){
+					$(".story").stop().slideToggle(300);
+				});
+			});
+
+		</script>
 	</head>
 
 	<body>
-		<div id="story">
+		<button>Story</button>
+		<div class="story">
 			<h1>„Sense my city“ - LIGHTeSCAPE</h1>
 			<h3>Streetlights and traffic in Prenzlauer Allee and Schönhauser Allee, Berlin</h3>
 			<p>„Sense my city“ is an international project of the University of Applied Sciences Magdeburg-Stendal, M.A. Crossmedia, in cooperation with University of Maribor. Summer term 2014.<br />
@@ -20,7 +30,7 @@
 		</div>
 		<form class="button">
 
-			<input type="button" value="Lights: Lumen" class="button" onClick="alert('yes!');">
+			<input type="button" value="Lights: Lumen" class="button" onClick="">
 			<input type="button" value="Lights: Watt" class="button" onClick="cars">
 			<input type="button" value="Traffic" class="button">
 			<div id="tooltip_light" class="hidden">
@@ -78,6 +88,9 @@
 
 <script type="text/javascript">
 
+	$("button").click(function(){
+		$(".story").hide(1000);
+	});
 
 	//      CREATE GOOGLE MAP
 	//	var map = new google.maps.Map(document.getElementById('map'), {
@@ -196,8 +209,8 @@
 			overlay.draw = function() {
 				var projection = this.getProjection()
 				var padding = 10;
-				var height = 18;
-				var width = 18;
+				var height = 21;
+				var width = 21;
 				var hover = 4;
 
 				var marker = layer.selectAll("svg")
@@ -359,7 +372,7 @@
 				.attr("class", "marker") // good for testing (there is blue background color for example)
 				.style("height", function(d) {return Math.sqrt(watt_radius_scale(d.watt))*2;}) // height = radius*2
 				.style("width", function(d) {return Math.sqrt(watt_radius_scale(d.watt))*2;})
-				.attr("transform", "translate(" + -radius_outer + "," + -radius_outer + ")") // toDo: Position of each element should not be static by the variable padding but dynamically depending on the radius (for better alignment)
+				//				.attr("transform", "translate(" + -radius_outer + "," + -radius_outer + ")") // toDo: Position of each element should not be static by the variable padding but dynamically depending on the radius (for better alignment)
 
 
 				var tooltip_light = d3.select("body").append("div")
@@ -376,7 +389,7 @@
 				//				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
 				.style("fill-opacity", .7)
 				.style("stroke-width", 1)
-//				.attr("transform", "translate(" + -10 + "," + -5 + ")");
+				//				.attr("transform", "translate(" + -10 + "," + -5 + ")");
 
 				// Inner circle.
 				marker.append("svg:circle")

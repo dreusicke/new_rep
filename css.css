@@ -30,6 +30,10 @@ p {
 	margin: 0 10px 0 0;
 }
 
+/*class to hide and show through jQuery*/
+.story {
+}
+
 .marker{
 	padding: 0px;
 	/*background-color is just for testing*/
