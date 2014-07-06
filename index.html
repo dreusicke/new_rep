@@ -84,15 +84,15 @@
 					<tr><td class="thead" colspan="2">Road users: 2-3am</td></tr>
 					<!--						<tr><td class="td_name_first">lat/lon</td><td class="td_data_first"><span id="lat">dummie/</span> / <span id="lon">dummie</span></td></tr>-->
 					<!--						<tr><td class="td_name">Streetname</td><td class="td_data_car"><span id="streetname">dummie</span></td></tr>-->
-					<tr><td class="td_name">Pedestrians</td><td class="td_data_car"><span id="pedestrian_night">dummie</span></td></tr>
-					<tr><td class="td_name">Bikes</td><td class="td_data_car"><span id="bike_night">dummie</span></td></tr>
-					<tr><td class="td_name_double">Unmotorized traffic</td><td class="td_data_double"><span id="mean_unmotorized_night">dummie</span></td></tr>
-					<tr><td class="td_name_first">Cars</td><td class="td_data_first"><span id="traffic_night">dummie</span></td></tr>
-					<tr><td class="td_name">Trucks</td><td class="td_data_car"><span id="truck_night">dummie</span></td></tr>
-					<tr><td class="td_name">Vans</td><td class="td_data_car"><span id="van_night">dummie</span></td></tr>
-					<tr><td class="td_name">Motorbikes</td><td class="td_data_car"><span id="motorbike_night">dummie</span></td></tr>
-					<tr><td class="td_name">Busses</td><td class="td_data_car"><span id="bus_night">dummie</span></td></tr>
-					<tr><td class="td_name_double">Motorized traffic</td><td class="td_data_double"><span id="mean_motorized_night">dummie</span></td></tr>
+					<tr><td class="td_name">Pedestrians</td><td class="td_data_car"><span id="pedestrian_night">dummie</span><span id="pedestrian_range">dummie</span></td></tr>
+					<tr><td class="td_name">Bikes</td><td class="td_data_car"><span id="bike_night">dummie</span><span id="bike_range">dummie</span></td></tr>
+					<tr><td class="td_name_double">∑ Unmotorized traffic</td><td class="td_data_double"><span id="mean_unmotorized_night">dummie</span></td></tr>
+					<tr><td class="td_name_first">Cars</td><td class="td_data_first"><span id="car_night">dummie</span><span id="car_range">dummie</span></td></tr>
+					<tr><td class="td_name">Trucks</td><td class="td_data_car"><span id="truck_night">dummie</span><span id="truck_range">dummie</span></td></tr>
+					<tr><td class="td_name">Vans</td><td class="td_data_car"><span id="van_night">dummie</span><span id="van_range">dummie</span></td></tr>
+					<tr><td class="td_name">Motorbikes</td><td class="td_data_car"><span id="motorbike_night">dummie</span><span id="motorbike_range">dummie</span></td></tr>
+					<tr><td class="td_name">Busses</td><td class="td_data_car"><span id="bus_night">dummie</span><span id="bus_range">dummie</span></td></tr>
+					<tr><td class="td_name_double">∑ Motorized traffic</td><td class="td_data_double"><span id="mean_motorized_night">dummie</span></td></tr>
 				</tbody>
 			</table>
 
@@ -181,30 +181,56 @@
 		//  CREATE COLOR SCALE FOR DATAPOINTS
 
 
-		var cars = function(d) {return +d.car_night}; //fucking "+" before "d" is necessary to handle the output as a number (not a string)
-		var pedestrians = function(d) {return +d.pedestrian_night};
-
-		var traffic_min = d3.min(data, cars);
-		//console.log("car_min: " + traffic_min);
-
-		var traffic_max = d3.max(data, cars);
-		//console.log("car_max: " + traffic_max);
-
-		var traffic_scale = d3.scale.linear()
-		.domain([traffic_min,traffic_max])
-		.range(["lightblue", "blue"]);
-		//.range(["#b2fd07","#ff6200"]); // yellowgreen/red
+		var pedestrians = function(d) {return +d.pedestrian_night}; // "+" before "d" is necessary to handle the output as a number (not a string)
+		var bikes = function(d) {return +d.bike_night};
+		var cars = function(d) {return +d.car_night};
+		var trucks = function(d) {return +d.truck_night};
+		var vans = function(d) {return +d.van_night};
+		var motorbikes = function(d) {return +d.motorbike_night};
+		var busses = function(d) {return +d.bus_night};
 
 		var pedestrian_min = d3.min(data, pedestrians);
 		console.log("pedestrian_min: " + pedestrian_min);
-
 		var pedestrian_max = d3.max(data, pedestrians);
 		console.log("pedestrian_max: " + pedestrian_max);
-
 		var pedestrian_scale = d3.scale.linear()
-		.domain([pedestrian_min,pedestrian_max])
+		.domain([pedestrian_min, pedestrian_max])
 		.range(["lightblue", "blue"]);
 		//.range(["green","red"]); // yellowgreen/red
+
+		var bike_min = d3.min(data, bikes);
+		console.log("bike_min: " + bike_min);
+		var bike_max = d3.max(data, bikes);
+		console.log("bike_max: " + bike_max);
+
+		var car_min = d3.min(data, cars);
+		console.log("car_min: " + car_min);
+		var car_max = d3.max(data, cars);
+		console.log("car_max: " + car_max);
+		var car_scale = d3.scale.linear()
+		.domain([car_min, car_max])
+		.range(["lightblue", "#0043ac"]);
+		//.range(["#b2fd07","#ff6200"]); // yellowgreen/red
+
+		var truck_min = d3.min(data, trucks);
+		console.log("truck_min: " + truck_min);
+		var truck_max = d3.max(data, trucks);
+		console.log("truck_max: " + truck_max);
+
+		var van_min = d3.min(data, vans);
+		console.log("van_min: " + van_min);
+		var van_max = d3.max(data, vans);
+		console.log("van_max: " + van_max);
+
+		var motorbike_min = d3.min(data, motorbikes);
+		console.log("motorbike_min: " + motorbike_min);
+		var motorbike_max = d3.max(data, motorbikes);
+		console.log("motorbike_max: " + motorbike_max);
+
+		var bus_min = d3.min(data, busses);
+		console.log("bus_min: " + bus_min);
+		var bus_max = d3.max(data, busses);
+		console.log("bus_max: " + bus_max);
 
 		d3.select("trafficHide").on("click", function(){
 			// code to hide element
@@ -267,13 +293,20 @@
 					//          d3.select(this).attr("class", "circleHighlighted").transition().duration(100)
 					d3.select(this).style("stroke-width", hover).transition().duration(100)
 					d3.select("#tooltip_traffic").select("#pedestrian_night").text(d3.round(d.pedestrian_night))
+					d3.select("#tooltip_traffic").select("#pedestrian_range").text(" (r = " + pedestrian_min + " to " + pedestrian_max + ")" )
 					d3.select("#tooltip_traffic").select("#bike_night").text(d3.round(d.bike_night))
+					d3.select("#tooltip_traffic").select("#bike_range").text(" (r = " + d3.round(bike_min) + " to " + bike_max + ")" )
 					d3.select("#tooltip_traffic").select("#mean_unmotorized_night").text(d3.round(d.mean_unmotorized_night))
-					d3.select("#tooltip_traffic").select("#traffic_night").text(d3.round(d.car_night))
+					d3.select("#tooltip_traffic").select("#car_night").text(d3.round(d.car_night))
+					d3.select("#tooltip_traffic").select("#car_range").text(" (r = " + d3.round(car_min) + " to " + d3.round(car_max) + ")" )
 					d3.select("#tooltip_traffic").select("#truck_night").text(d3.round(d.truck_night))
+					d3.select("#tooltip_traffic").select("#truck_range").text(" (r = " + d3.round(truck_min) + " to " + d3.round(truck_max) + ")" )
 					d3.select("#tooltip_traffic").select("#van_night").text(d3.round(d.van_night))
+					d3.select("#tooltip_traffic").select("#van_range").text(" (r = " + d3.round(van_min) + " to " + d3.round(van_max) + ")" )
 					d3.select("#tooltip_traffic").select("#motorbike_night").text(d3.round(d.motorbike_night))
+					d3.select("#tooltip_traffic").select("#motorbike_range").text(" (r = " + d3.round(motorbike_min) + " to " + d3.round(motorbike_max) + ")" )
 					d3.select("#tooltip_traffic").select("#bus_night").text(d3.round(d.bus_night))
+					d3.select("#tooltip_traffic").select("#bus_range").text(" (r = " + d3.round(bus_min) + " to " + d3.round(bus_max) + ")" )
 					d3.select("#tooltip_traffic").select("#mean_motorized_night").text(d3.round(d.mean_motorized_night))
 					d3.select("#tooltip_traffic").classed("hidden", false).transition().duration(500)
 					//          d3.select("#tooltip_traffic").style("opacity", 0).delay(100)
