@@ -140,6 +140,12 @@ table {
 	padding-right: .5em;
 }
 
+.td_name_first {
+	text-align: left;
+	border-bottom: 1px solid #888;
+	padding: 1em .5em 0 0;
+}
+
 .td_data_first {
 	text-align: right;
 	border-bottom: 1px solid #888;
