@@ -341,7 +341,7 @@
 			// Draw each marker as a separate SVG element. We could use a single SVG, but what size would it have?
 			overlay.draw = function() {
 				var projection = this.getProjection()
-				var padding = 10;
+				var padding = 20;  // important for positioning of the data points to the map
 
 				//    var test = layer.selectAll("svg").data(data);
 				//    console.log("test "+test);
@@ -356,9 +356,10 @@
 				.each(transform) // update existing markers
 				.enter().append("svg:svg")
 				.each(transform)
-				.attr("class", "marker")
+				.attr("class", "marker") // good for testing (there is blue background color for example)
 				.style("height", function(d) {return Math.sqrt(watt_radius_scale(d.watt))*2;}) // height = radius*2
-				.style("width", function(d) {return Math.sqrt(watt_radius_scale(d.watt))*2;});
+				.style("width", function(d) {return Math.sqrt(watt_radius_scale(d.watt))*2;})
+				.attr("transform", "translate(" + -10 + "," + -5 + ")")
 
 
 				var tooltip_light = d3.select("body").append("div")
@@ -375,7 +376,7 @@
 				//				.style("fill-opacity", function(d) {return lumen_color_scale(d.lumen);})
 				.style("fill-opacity", .7)
 				.style("stroke-width", 1)
-				//				.attr("transform", "translate(-radius_outer/2, -radius_outer/2)")
+//				.attr("transform", "translate(" + -10 + "," + -5 + ")");
 
 				// Inner circle.
 				marker.append("svg:circle")
