@@ -359,7 +359,7 @@
 				.attr("class", "marker") // good for testing (there is blue background color for example)
 				.style("height", function(d) {return Math.sqrt(watt_radius_scale(d.watt))*2;}) // height = radius*2
 				.style("width", function(d) {return Math.sqrt(watt_radius_scale(d.watt))*2;})
-				.attr("transform", "translate(" + -10 + "," + -5 + ")")
+				.attr("transform", "translate(" + -radius_outer + "," + -radius_outer + ")") // toDo: Position of each element should not be static by the variable padding but dynamically depending on the radius (for better alignment)
 
 
 				var tooltip_light = d3.select("body").append("div")
