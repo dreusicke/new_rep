@@ -19,7 +19,7 @@
 			$(function(){
 				$("#watt_button").click(function(){
 					$(".outer_circle").stop().fadeToggle(1500);
-					return false;
+					return false; //FIXME: doesn't work, because D3 objects are no DOM objects (yet)
 				});
 			});
 
