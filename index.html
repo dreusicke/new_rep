@@ -18,21 +18,21 @@
 
 			$(function(){
 				$("#watt_button").click(function(){
-					$(".outer_circle").stop().slideToggle(500);
+					$(".outer_circle").stop().fadeToggle(1500);
 					return false;
 				});
 			});
 
 			$(function(){
 				$("#lumen_button").click(function(){
-					$(".inner_circle").stop().slideToggle(500);
+					$(".inner_circle").stop().fadeToggle(1500);
 					return false;
 				});
 			});
 
 			$(function(){
 				$("#traffic_button").click(function(){
-					$(".traffic_rect").stop().slideToggle(500);
+					$(".traffic_rect").stop().fadeToggle(1500);
 					return false;
 				});
 			});
@@ -42,10 +42,10 @@
 
 	<body>
 		<div>
-			<h1>„Sense my city“ - LIGHTeSCAPE</h1>
-			<h3 >Streetlights and traffic in Prenzlauer Allee and Schönhauser Allee, Berlin</h3>
+			<h1 style="font-weight: 100; color: #999;">„Sense my city“ - LIGHTeSCAPE</h1>
+			<h3 style="font-weight: 100; color: #999;">Streetlights and traffic in Prenzlauer Allee and Schönhauser Allee, Berlin</h3>
 			<button id="story_button" style="float:left">Project members and details</button>
-			<p id="story" class="hidden" style="clear:left; padding:10px 0;">„Sense my city“ is an international project of the University of Applied Sciences Magdeburg-Stendal, M.A. Crossmedia, in cooperation with University of Maribor. Summer term 2014.<br />
+			<p id="story" class="hidden">„Sense my city“ is an international project of the University of Applied Sciences Magdeburg-Stendal, M.A. Crossmedia, in cooperation with University of Maribor. Summer term 2014.<br />
 				Students: Michael Dreusicke, Nadine Mollenhauer, Maria Rieger, Viktoria Schult, Laura Schulz, Alexandra Seegerer, Katrin Wildt.<br />
 				Team leaders: Anne Koslowski, Mileen Mollenhauer.<br />
 				Project supervisor: Björn Stockleben</p>
@@ -54,6 +54,7 @@
 		<button id="traffic_button">Traffic of Pedestrians</button>
 		<button id="lumen_button">Lumen of Lights</button>
 		<button id="watt_button">Watt of Lights</button>
+
 		<div class="tooltips">
 			<div id="tooltip_light" class="hidden">
 				<p class="infobox">
@@ -99,43 +100,9 @@
 	</div>
 
 
-
-
-
 <div id="map"></div>
 
 <script type="text/javascript">
-
-
-	//      CREATE GOOGLE MAP
-	//	var map = new google.maps.Map(document.getElementById('map'), {
-	//		center: new google.maps.LatLng(52.5377, 13.4281),
-	//		//zoom: 17, // (good for one street)
-	//		zoom: 15,
-	//		mapTypeId: google.maps.MapTypeId.HYBRID,
-	//		overviewMapControl: true,
-	//		overviewMapControlOptions: {
-	//			opened: true
-	//		},
-	//		styles: 
-	//		[
-	//			{
-	//				"stylers": [
-	//					{ "invert_lightness": true },
-	//					{ "gamma": 0.93 },
-	//					{ "lightness": -39 },
-	//					{ "saturation": -81 }
-	//				]
-	//			},{
-	//				"featureType": "road",
-	//				"stylers": [
-	//					{ "saturation": -40 },
-	//					{ "lightness": 4 },
-	//					{ "gamma": 1.04 }
-	//				]
-	//			}
-	//		]
-	//	});
 
 	var map = new google.maps.Map(document.getElementById('map'), {
 		center: new google.maps.LatLng(52.5377, 13.4281), //good value for seeing both streets
@@ -167,10 +134,7 @@
 		]
 	});
 
-
-
 	//  TRAFFIC VISUALIZATION
-
 
 	//  IMPORT DATA FOR TRAFFIC FROM EXTERNAL FILE
 
@@ -179,8 +143,7 @@
 	//  Load the station data. When the data comes back, create an overlay.
 	importFunction1("mobility_night.csv", function(data) {
 
-		//  CREATE COLOR SCALE FOR DATAPOINTS
-
+		//  CREATE SCALES FOR DATAPOINTS
 
 		var pedestrians = function(d) {return +d.pedestrian_night}; // "+" before "d" is necessary to handle the output as a number (not a string)
 		var bikes = function(d) {return +d.bike_night};
@@ -232,11 +195,6 @@
 		console.log("bus_min: " + bus_min);
 		var bus_max = d3.max(data, busses);
 		console.log("bus_max: " + bus_max);
-
-		d3.select("trafficHide").on("click", function(){
-			// code to hide element
-			d3.selectAll(".traffic_rect").style("display", "none");
-		})
 
 		//    CREATE OVERLAY FOR GOOGLE MAPS
 
