@@ -8,6 +8,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css.css">
 		<script>
+$( window ).load(function() {
 
 			$(function(){
 				$("#story_button").click(function(){
@@ -19,7 +20,7 @@
 			$(function(){
 				$("#watt_button").click(function(){
 					$(".outer_circle").stop().fadeToggle(1500);
-					return false; //FIXME: doesn't work, because D3 objects are no DOM objects (yet)
+					return false; //FIXME: doesn't work, because D3 objects are no DOM objects (yet), the window.load wrapper doesn't work yet
 				});
 			});
 
@@ -36,7 +37,7 @@
 					return false;
 				});
 			});
-
+});
 		</script>
 	</head>
 
