@@ -60,19 +60,13 @@ p {
 	fill-opacity: 1;
 }
 
-form.button {
+.tooltips {
 	/*  position: absolute;*/
 	bottom: 20px;
 	right: 20px;
 	z-index: 100000000;
 	text-align: right;
 	margin: 0 0% 1em 0;
-}
-
-input.button {
-	padding: 10px;
-	color: #6A4E03;
-	margin-left: 1em;
 }
 
 #tooltip_light, #tooltip_traffic {
@@ -108,7 +102,8 @@ input.button {
 	display: none;
 }
 
-#tooltip_light p, tooltip_traffic p { margin: 0;
+#tooltip_light p, tooltip_traffic p { 
+	margin: 0;
 }
 
 table {

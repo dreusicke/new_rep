@@ -19,21 +19,23 @@
 			$(function(){
 				$("#watt_button").click(function(){
 					$(".outer_circle").stop().slideToggle(500);
+					return false;
 				});
 			});
 
 			$(function(){
 				$("#lumen_button").click(function(){
 					$(".inner_circle").stop().slideToggle(500);
+					return false;
 				});
 			});
 
 			$(function(){
 				$("#traffic_button").click(function(){
 					$(".traffic_rect").stop().slideToggle(500);
+					return false;
 				});
 			});
-
 
 		</script>
 	</head>
@@ -42,21 +44,17 @@
 		<div>
 			<h1>„Sense my city“ - LIGHTeSCAPE</h1>
 			<h3 >Streetlights and traffic in Prenzlauer Allee and Schönhauser Allee, Berlin</h3>
-			<button id="story_button">Project members and details</button>
-			<p id="story" class="hidden">„Sense my city“ is an international project of the University of Applied Sciences Magdeburg-Stendal, M.A. Crossmedia, in cooperation with University of Maribor. Summer term 2014.<br />
+			<button id="story_button" style="float:left">Project members and details</button>
+			<p id="story" class="hidden" style="clear:left; padding:10px 0;">„Sense my city“ is an international project of the University of Applied Sciences Magdeburg-Stendal, M.A. Crossmedia, in cooperation with University of Maribor. Summer term 2014.<br />
 				Students: Michael Dreusicke, Nadine Mollenhauer, Maria Rieger, Viktoria Schult, Laura Schulz, Alexandra Seegerer, Katrin Wildt.<br />
 				Team leaders: Anne Koslowski, Mileen Mollenhauer.<br />
 				Project supervisor: Björn Stockleben</p>
 		</div>
-		<form class="button">
-			<button id="lumen_button">Lumen of lights</button>
-			<button id="watt_button">Watt of lights</button>
-			<button id="traffic_button">Traffic of pedestrians</button>
 
-			<div id="trafficHide">
-				<input name="hideButton" type="button" value="Hide Lumen" />
-			</div>
-
+		<button id="traffic_button">Traffic of Pedestrians</button>
+		<button id="lumen_button">Lumen of Lights</button>
+		<button id="watt_button">Watt of Lights</button>
+		<div class="tooltips">
 			<div id="tooltip_light" class="hidden">
 				<p class="infobox">
 				<table>
@@ -76,7 +74,7 @@
 				</table>
 
 				</p>
-			</div>
+		</div>
 		<div id="tooltip_traffic" class="hidden">
 			<p class="infobox">
 			<table>
@@ -98,28 +96,11 @@
 
 			</p>
 		</div>
+	</div>
 
-	</form>
 
-<script>
-	var buttons = d3.select("body").append("svg")
-	.attr("width", 400)
-	.attr("height", 40);
 
-	var button1 = buttons.append("rect")
-	.attr("x", 10)
-	.attr("y", 10)
-	.attr("width", 100)
-	.attr("height", 30)
-	.style("fill", "grey")
-	.on("click", function(d) {
-		d3.select(this).style("fill", "white")
-		d3.selectAll(".inner_circle").style("opacity", ".3")
-//		d3.selectAll(".outer_circle").style("opacity", ".3")
-//		d3.selectAll(".traffic_rect").style("opacity", ".3")
-		;
-	})
-</script>
+
 
 <div id="map"></div>
 
