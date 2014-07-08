@@ -101,6 +101,26 @@
 
 	</form>
 
+<script>
+	var buttons = d3.select("body").append("svg")
+	.attr("width", 400)
+	.attr("height", 40);
+
+	var button1 = buttons.append("rect")
+	.attr("x", 10)
+	.attr("y", 10)
+	.attr("width", 100)
+	.attr("height", 30)
+	.style("fill", "grey")
+	.on("click", function(d) {
+		d3.select(this).style("fill", "white")
+		d3.selectAll(".inner_circle").style("opacity", ".3")
+//		d3.selectAll(".outer_circle").style("opacity", ".3")
+//		d3.selectAll(".traffic_rect").style("opacity", ".3")
+		;
+	})
+</script>
+
 <div id="map"></div>
 
 <script type="text/javascript">
