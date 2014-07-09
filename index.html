@@ -10,7 +10,7 @@
 		<script type="text/javascript">
 			$(function(){
 				$("#story_button").click(function(){
-					$("#story").stop().slideToggle(200);
+					$("#story_p, #story_table").stop().slideToggle(200);
 					return false;
 				});
 			});
@@ -42,10 +42,13 @@
 			<h1 style="font-weight: 100; color: #999;">„Sense my city“ - LIGHTeSCAPE</h1>
 			<h3 style="font-weight: 100; color: #999;">Streetlights and traffic in Prenzlauer Allee and Schönhauser Allee, Berlin</h3>
 			<button id="story_button" style="float:left">Project members and details</button>
-			<p id="story" class="hidden">„Sense my city“ is an international project of the University of Applied Sciences Magdeburg-Stendal, M.A. Crossmedia, in cooperation with University of Maribor. Summer term 2014.<br />
-				Students: Michael Dreusicke, Nadine Mollenhauer, Maria Rieger, Viktoria Schult, Laura Schulz, Alexandra Seegerer, Katrin Wildt.<br />
-				Team leaders: Anne Koslowski, Mileen Mollenhauer.<br />
-				Project supervisor: Björn Stockleben</p>
+			<p id="story_p" class="hidden"><i>Sense my city</i> is an international project of the University of Applied Sciences Magdeburg-Stendal, M.A. Crossmedia, in cooperation with the University of Maribor. Summer term 2014.
+			</p>
+			<table id="story_table" class="hidden">
+				<tr><td class="story_function">Students&nbsp;</td><td>Michael Dreusicke, Nadine Mollenhauer, Maria Rieger, Viktoria Schult, Laura Schulz, Alexandra Seegerer, Katrin Wildt.</td></tr>
+				<tr><td class="story_function">Team leaders&nbsp;</td><td>Anne Koslowski, Mileen Mollenhauer.</td></tr>
+				<tr><td class="story_function">Project supervisor&nbsp;</td><td>Björn Stockleben</td></tr>
+			</table>
 		</div>
 
 		<button id="traffic_button">Traffic of Pedestrians</button>

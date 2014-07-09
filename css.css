@@ -36,18 +36,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-	font-size: 0.8em;
-	font-weight: 100;
-	margin: 0 10px 0 0;
-	line-height: 140%;
 }
 
 /*class to hide and show through jQuery*/
-#story {
+#story_p, #story_table {
 	clear: left;
-	padding: 10px 0;
+	color: #999;
+	font-size: 0.8em;
+	font-weight: 100;
+	line-height: 140%;
+}
+
+#story_p {
+	padding: 20px 0 0 0;
+}
+
+#story_table {
+	padding: 0 0 30px 0;
+}
+
+.story_function {
 	color: #ddd;
 	margin: 0 0 10px 0;
+	font-weight: 100;
+	margin: 0 10px 0 0;
+	line-height: 140%;
 }
 
 .marker{
