@@ -7,9 +7,7 @@
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css.css">
-		<script>
-$( window ).load(function() {
-
+		<script type="text/javascript">
 			$(function(){
 				$("#story_button").click(function(){
 					$("#story").stop().slideToggle(200);
@@ -27,7 +25,6 @@ $( window ).load(function() {
 			$(function(){
 				$("#lumen_button").click(function(){
 					$(".inner_circle").stop().fadeToggle(1500);
-					return false;
 				});
 			});
 
@@ -37,7 +34,6 @@ $( window ).load(function() {
 					return false;
 				});
 			});
-});
 		</script>
 	</head>
 
@@ -111,7 +107,7 @@ $( window ).load(function() {
 		//		zoom: 17, // (good for one street)
 		zoom: 15, // good for an overview
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
-//		overviewMapControl: true,
+		//		overviewMapControl: true,
 		overviewMapControl: false,
 		overviewMapControlOptions: {
 			opened: true
@@ -502,5 +498,10 @@ $( window ).load(function() {
 	});
 
 </script>
+
+<script type="text/javascript">
+	setTimeout(function(){$(".outer_circle, .inner_circle, .traffic_rect").hide();}, 2000); //FiXME: hide not after time, but immediately after D3 objects have been created
+</script>
+
 </body>
 </html>
