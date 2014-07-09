@@ -207,7 +207,8 @@ table {
 	bottom: 0px;
 	background: rgba(249, 242, 242, 0.16);
 	border-top-right-radius: 50px;
-	padding: 10px;
+	border-bottom-right-radius: 50px;
+	padding: 10px 0 15px 5px;
 	font-size: x-small;
 	color: rgba(255, 255, 255, 0.65);
 }
@@ -224,6 +225,7 @@ table {
 .legend_pic {
 	padding: 2px 0;
 	text-align: center;
+	cursor: pointer;
 }
 
 .legend_text {
