@@ -136,8 +136,7 @@ p {
 }
 
 table {
-	background-color: #111;
-	text-align: left;
+	background-color: none;
 }
 
 .thead {
