@@ -230,5 +230,6 @@ table {
 
 .legend_text {
 	padding: 0 10px 0 5px;
+	font-size: 1.2em;
 	display: none;
 }
