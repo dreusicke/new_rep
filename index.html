@@ -18,7 +18,6 @@
 			$(function(){
 				$("#watt_button").click(function(){
 					$(".outer_circle").stop().fadeToggle(1500);
-					return false; //FIXME: doesn't work, because D3 objects are no DOM objects (yet), the window.load wrapper doesn't work yet
 				});
 			});
 
@@ -31,7 +30,6 @@
 			$(function(){
 				$("#traffic_button").click(function(){
 					$(".traffic_rect").stop().fadeToggle(1500);
-					return false;
 				});
 			});
 
@@ -553,10 +551,6 @@
 		overlay.setMap(map);
 	});
 
-</script>
-
-<script type="text/javascript">
-	setTimeout(function(){$(".outer_circle, .inner_circle, .traffic_rect").hide();}, 2000); //FiXME: hide not after time, but immediately after D3 objects have been created
 </script>
 
 </body>

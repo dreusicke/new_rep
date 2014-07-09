@@ -127,7 +127,7 @@ p {
 	pointer-events: none;
 }
 
-.hidden {
+.hidden, .inner_circle, .outer_circle, .traffic_rect {
 	display: none;
 }
 
@@ -208,7 +208,7 @@ table {
 	background: rgba(249, 242, 242, 0.16);
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;
-	padding: 10px 0 15px 5px;
+	padding: 10px 7px 15px 5px;
 	font-size: x-small;
 	color: rgba(255, 255, 255, 0.65);
 }
