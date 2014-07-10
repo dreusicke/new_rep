@@ -36,6 +36,8 @@
 			$(function(){
 				$(".legend_pic").click(function(){
 					$(".legend_thead, .legend_text").stop().fadeToggle(300);
+					$('.legend').toggleClass('legend_black');
+//					$(".legend").animate({ background : 'ff0' }, 3000);
 				});
 			});
 		</script>
