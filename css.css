@@ -213,7 +213,7 @@ table {
 .legend {
 	position: absolute;
 	z-index: 10;
-	bottom: 0px; /* 0px for presentation 30px = better for greater resolution*/
+	top: 70%;
 	background: rgba(249, 242, 242, 0.16);
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;

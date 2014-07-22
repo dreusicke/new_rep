@@ -37,7 +37,7 @@
 				$(".legend_pic").click(function(){
 					$(".legend_thead, .legend_text").stop().fadeToggle(300);
 					$('.legend').toggleClass('legend_black');
-//					$(".legend").animate({ background : 'ff0' }, 3000);
+					//					$(".legend").animate({ background : 'ff0' }, 3000);
 				});
 			});
 		</script>
@@ -152,15 +152,68 @@
 </div>
 
 
-<div id="map"></div>
+<div id="map">
+	<div class="legend">
+		<table id="legend_table">
+			<tr><td></td><td class="legend_thead">Legend</td></tr>
+			<tr>
+				<td class="legend_pic">
+					<svg width="16" height="16">
+						<circle cx="7" cy="7" r="7" fill="#ff009d" fill-opacity=".8" stroke="#3b3939" stroke-width="1" />
+					</svg>
+				</td>
+				<td class="legend_text">Min. light output in Lumen<br />(Lumen ≙ area, not radius)</td>
+			</tr>
+			<tr>
+				<td class="legend_pic">
+					<svg width="32" height="32">
+						<circle cx="15" cy="15" r="15" fill="#baff00" fill-opacity=".8" stroke="#3b3939" stroke-width="1" />
+					</svg>
+				</td>
+				<td class="legend_text">Max. light output in Lumen<br />(Lumen ≙ area, not radius)</td>
+			</tr>
+			<tr>
+				<td class="legend_pic">
+					<svg width="30" height="30">
+						<circle cx="15" cy="15" r="15" fill="#fff" fill-opacity=".7" />
+					</svg>
+				</td>
+				<td class="legend_text">Energy consumption in Watt<br />(consumption ≙ area, not radius)</td>
+			</tr>
+			<tr>
+				<td class="legend_pic">
+					<svg width="21" height="21">
+						<rect x="0" y="0" height="21" width="21" fill="lightblue" fill-opacity=".7" />
+					</svg>
+				</td>
+				<td class="legend_text">Min. Traffic of Pedestrians</td>
+			</tr>
+			<tr>
+				<td class="legend_pic">
+					<svg width="21" height="21">
+						<rect x="0" y="0" height="21" width="21" fill="#0054f4" fill-opacity=".7" />
+					</svg>
+				</td>
+				<td class="legend_text">Max. Traffic of Pedestrians</td>
+			</tr>
+		</table>
+	</div>
+
+
+</div>
 <div id="sources">
 	<h3>Sources</h3>
-<ul>
-  <li><strong>Light data: </strong>Senatsverwaltung für Stadtentwicklung und Umwelt, Berlin</li>
-  <li><strong>Traffic data: </strong>Based on "Umweltatlas Berlin/Verkehrsmengen 2009"</li>
-  <li><strong>Source code: </strong><a href="https://github.com/dreusicke/new_rep">Repository on GitHub</a></li>
-</ul>
- 
+	<ul>
+		<li><strong>Light data: </strong>Senatsverwaltung für Stadtentwicklung und Umwelt, Berlin</li>
+		<li><strong>Traffic example data (modified): </strong>Based on "Umweltatlas Berlin/Verkehrsmengen 2009" (<a href="http://www.stadtentwicklung.berlin.de/geoinformation/download/nutzIII.pdf">open data license</a>)</li>
+		<li><strong>Source code: </strong><a href="https://github.com/dreusicke/new_rep">Repository on GitHub</a></li>
+	</ul>
+	<h3>Supported web browsers</h3>
+	<ul>
+		<li>So far only <a href="https://www.google.com/intl/en/chrome/browser">Google Chrome</a></li>
+	</ul>
+	<br />
+	<br />
 </div>
 
 <script type="text/javascript">
