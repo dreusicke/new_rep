@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 <!--        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu1uEmZXOYLAJaUyAaqABfHsTnQUdKnuQ&callback=initMap" type="text/javascript"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.15.1/d3.min.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.15.1/d3.min.js"></script>-->
+    <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css.css">
 
@@ -14,17 +15,31 @@
 
 <body>
     <!-- load the d3.js library -->
+ 
+    <!-- Add a svg shape -->
+
+    
     <!--    <script src="https://d3js.org/d3.v5.min.js"></script>-->
     <div>
         <h1 style="font-weight: 100; color: #999;">COVID19 on Google Maps</h1>
     </div>
-
+    
+    
+    
     <button id="traffic_button">Traffic</button>
     <button id="lumen_button">Brightness</button>
     <button id="watt_button">Consumption</button>
 
 
 
+<script>
+    d3
+  .select("#traffic_button")  // select the elements that have the class 'target'
+  .style("color", "red") // change their style: stroke width is not equal to 8 pixels
+</script>
+
+    
+    
 
     <div id="map">
 
@@ -32,7 +47,6 @@
     </div>
 
     <script type="text/javascript">
-
 
         var map = new google.maps.Map(document.getElementById('map'), {
             center: new google.maps.LatLng(52.5377, 13.4281),
@@ -85,12 +99,12 @@
         //  TRAFFIC VISUALIZATION
 
         //  IMPORT DATA FOR TRAFFIC FROM EXTERNAL FILE
-        // var importFunction1 = d3.dsv(";", "text.csv");
-        var importFunction1 = d3.dsv(';', 'http://covid19.pubport.de/mobility_night.csv').then(function(data) {
-                console.log(data)
+         var importFunction1 = d3.dsv(";", "text.csv");
+//        var importFunction1 = d3.dsv(';', 'http://covid19.pubport.de/mobility_night.csv').then(function(data) {
+//                console.log(data)
 //            });
         //  Load the station data. When the data comes back, create an overlay.
-//        importFunction1("mobility_night.csv", function(data) {
+        importFunction1("http://covid19.pubport.de/mobility_night.csv", function(data) {
 
             //  CREATE SCALES FOR DATAPOINTS
 
@@ -120,7 +134,7 @@
             console.log("pedestrian_min: " + pedestrian_min);
             var pedestrian_max = d3.max(data, pedestrians);
             console.log("pedestrian_max: " + pedestrian_max);
-            var pedestrian_scale = d3.scaleLinear()
+            var pedestrian_scale = d3.scale.linear()
                 .domain([pedestrian_min, pedestrian_max])
                 .range(["lightblue", "#0054f4"]);
             //.range(["green","red"]); // yellowgreen/red
@@ -134,7 +148,7 @@
             console.log("car_min: " + car_min);
             var car_max = d3.max(data, cars);
             console.log("car_max: " + car_max);
-            var car_scale = d3.scaleLinear()
+            var car_scale = d3.scale.linear()
                 .domain([car_min, car_max])
                 .range(["lightblue", "#0043ac"]);
             //.range(["#b2fd07","#ff6200"]); // yellowgreen/red
@@ -269,11 +283,13 @@
 
         //  IMPORT DATA FOR SCHOENHAUSER ALLEE FROM EXTERNAL FILE
 
-        var importFunction3 = d3.dsv(";", "http://covid19.pubport.de/prenzl_schoen_allee.csv").then(function(data) {
-                console.log(data)
+        var importFunction3 = d3.dsv(";", "text.csv") 
+
+        //        var importFunction3 = d3.dsv(";", "http://covid19.pubport.de/prenzl_schoen_allee.csv").then(function(data) {
+//                console.log(data)
 
         //  Load the station data. When the data comes back, create an overlay.
-//        importFunction3("prenzl_schoen_allee.csv", function(data) {
+            importFunction3("http://covid19.pubport.de/prenzl_schoen_allee.csv", function(data) {
 
             //  CREATE COLOR SCALE FOR DATAPOINTS
 
@@ -297,8 +313,7 @@
             console.log("eei_min: " + eei_min);
             var eei_max = d3.max(data, eeis);
             console.log("eei_max: " + eei_max);
-
-            var eei_scale = d3.scaleLinear()
+            var eei_scale = d3.scale.linear()
                 .domain([eei_min, eei_max])
                 .range(["#baff00", "#ff009d"]); // yellowgreen/red
 
@@ -306,7 +321,7 @@
             console.log("watt_min: " + watt_min);
             var watt_max = d3.max(data, watts);
             console.log("watt_max: " + watt_max);
-            var watt_radius_scale = d3.scaleLinear()
+            var watt_radius_scale = d3.scale.linear()
                 .domain([watt_min, watt_max])
                 .range([100, 400]); //used for radius of outer circle
 
@@ -314,10 +329,10 @@
             console.log("lumen_min: " + lumen_min);
             var lumen_max = d3.max(data, lumens);
             console.log("lumen_max: " + lumen_max);
-            var lumen_color_scale = d3.scaleLinear()
+            var lumen_color_scale = d3.scale.linear()
                 .domain([lumen_min, lumen_max])
                 .range(["#d8ef00", "#ff6200"]);
-            var lumen_radius_scale = d3.scaleLinear()
+            var lumen_radius_scale = d3.scale.linear()
                 .domain([lumen_min, lumen_max])
                 .range([20, 200]); // used for radius of inner circle
 
@@ -349,10 +364,10 @@
                     var projection = this.getProjection()
                     var padding = 20; // important for positioning of the data points to the map
 
-                    //    var test = layer.selectAll("svg").data(data);
-                    //    console.log("test "+test);
-
-                    //				var radius = function(d) {return d.lumen/10000+3;}; 
+//                    var test = layer.selectAll("svg").data(data);
+//                        console.log("test "+test);
+//
+//                    var radius = function(d) {return d.lumen/10000+3;}; 
 
                     var radius_outer = function(d) {
                         return Math.sqrt(watt_radius_scale(d.watt));
@@ -468,7 +483,7 @@
 
 
                     function transform(d) {
-                        //          console.log("d "+d);
+                        console.log("d "+d);
                         data_point = new google.maps.LatLng(normalize(d.lat), normalize(d.lon));
                         data_point_projected = projection.fromLatLngToDivPixel(data_point);
                         return d3.select(this)
@@ -483,7 +498,7 @@
                     }
 
                     function getColor(value) {
-                        //          console.log("value "+value);
+                        console.log("value "+value);
                         if (value > 4) return "red";
                         else return "green";
                     }
@@ -494,7 +509,6 @@
             overlay.setMap(map);
         });
     </script>
-
 </body>
 
 </html>
