@@ -86,7 +86,7 @@
 
         //  IMPORT DATA FOR TRAFFIC FROM EXTERNAL FILE
         // var importFunction1 = d3.dsv(";", "text.csv");
-        var importFunction1 = d3.dsv(';', 'mobility_night.csv').then(function(data) {
+        var importFunction1 = d3.dsv(';', 'http://covid19.pubport.de/mobility_night.csv').then(function(data) {
                 console.log(data)
 //            });
         //  Load the station data. When the data comes back, create an overlay.
@@ -269,7 +269,7 @@
 
         //  IMPORT DATA FOR SCHOENHAUSER ALLEE FROM EXTERNAL FILE
 
-        var importFunction3 = d3.dsv(";", "https://covid19.pubport.de/prenzl_schoen_allee.csv").then(function(data) {
+        var importFunction3 = d3.dsv(";", "http://covid19.pubport.de/prenzl_schoen_allee.csv").then(function(data) {
                 console.log(data)
 
         //  Load the station data. When the data comes back, create an overlay.
