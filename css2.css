@@ -1,0 +1,253 @@
+html, body {
+	height: 70%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: black;
+}
+
+body {
+	width: 98%;
+	color: #fff2cf;
+	font-family: Arial, sans-serif;
+	padding: 1em;
+}
+
+#story_button, #traffic_button, #lumen_button, #watt_button {
+	height: 21px;
+	font-size: .8em;
+	padding: 0 10px;
+	margin: 0 10px 10px 0;
+	background: #000;
+	color: #999;
+	border: 1px solid #999;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#map {
+	width: 100%;
+	height: 80%;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 100;
+}
+
+p {
+}
+
+/*class to hide and show through jQuery*/
+#story_p, #story_table, #sources {
+	clear: left;
+	color: #999;
+	font-size: 0.8em;
+	font-weight: 100;
+	line-height: 140%;
+}
+
+#story_p {
+	padding: 20px 0 0 0;
+}
+
+a, a:visited {
+	color: #ccc;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #fff;
+}
+
+#story_table {
+	padding: 0 0 30px 0;
+}
+
+.story_function {
+	color: #ddd;
+	margin: 0 0 10px 0;
+	font-weight: 100;
+	margin: 0 10px 0 0;
+	line-height: 140%;
+}
+
+.marker{
+	padding: 0px;
+	/*background-color is just for testing*/
+	/*	background-color: red;*/
+}
+
+.datapoints, .datapoints svg {
+	position: absolute;
+}
+
+.datapoints svg {
+	width:  3em; /*only fallback value, since height and width are set dynamically*/
+	height: 3em; /*only fallback value*/
+	cursor: pointer;
+}
+
+.circle {
+}
+
+.circleHighlighted {
+	stroke: #fff;
+	stroke-width: 10;
+	fill: #f00;
+	fill-opacity: 1;
+}
+
+.tooltips {
+	/*  position: absolute;*/
+	bottom: 20px;
+	right: 20px;
+	z-index: 100000000;
+	text-align: right;
+	margin: 0 0% 1em 0;
+}
+
+#tooltip_light, #tooltip_traffic {
+	position: absolute;
+	font-family: sans-serif;
+	font-size: 12px;
+	font-weight: 100;
+	line-height: 130%;
+	color: #fff;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.8;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+	right: 10px;
+	z-index: 1000;
+	margin-top: 50px;
+	width: auto;
+	height: auto;
+	padding: 10px;
+	background-color: #000;
+	border: 1px solid  #777;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 4px 4px 10px rgba(159, 201, 252, 0.4);
+	-moz-box-shadow: 4px 4px 10px rgba(159, 201, 252, 0.4);
+	box-shadow: 4px 4px 10px rgba(159, 201, 252, 0.4);
+	pointer-events: none;
+}
+
+.hidden, .inner_circle, .outer_circle, .traffic_rect {
+	display: none;
+}
+
+#tooltip_light p, tooltip_traffic p { 
+	margin: 0;
+}
+
+table {
+	background-color: none;
+}
+
+.thead {
+	background-color: #000;
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 100;
+	padding: .5em 0 .7em 0;
+}
+
+.td_name {
+	text-align: left;
+	border-bottom: 1px dotted #888;
+	padding-right: .5em;
+}
+
+.td_data_light {
+	color: #fff;
+	text-align: left;
+	border-bottom: 1px dotted #888;
+	padding-right: .5em;
+}
+
+.td_data_car {
+	color: #fff;
+	text-align: right;
+	border-bottom: 1px dotted #888;
+	padding-right: .5em;
+}
+
+.td_name_first {
+	text-align: left;
+	border-bottom: 1px dotted #888;
+	padding: 1em .5em 0 0;
+}
+
+.td_data_first {
+	text-align: right;
+	border-bottom: 1px dotted #888;
+	padding: 1em .5em 0 .5em;
+}
+
+.td_name_double {
+	color: #fff;
+	text-align: left;
+	border-bottom: 3px double #888;
+	padding: 1em .5em 0 0;
+	margin-bottom: .5px;
+}
+
+.td_data_double {
+	text-align: right;
+	border-bottom: 3px double #888;
+	padding: 1em .5em 0 .5em;
+	margin-bottom: .5px;
+}
+
+#eei_range, #lumen_range, #watt_range, #consumption_range, #efficiency_range, #pedestrian_range, #bike_range, #car_range, #truck_range, #van_range, #motorbike_range, #bus_range {
+	font-size: smaller;
+	color: #aaa;
+	margin-left: 5px;
+}
+
+.legend {
+	position: absolute;
+	z-index: 10;
+	top: 70%;
+	background: rgba(249, 242, 242, 0.16);
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	padding: 10px 7px 15px 5px;
+	font-size: x-small;
+	color: rgba(255, 255, 255, 0.65);
+}
+
+.legend_black {
+	background: rgba(255, 255, 255, 0.2) !important;
+}
+
+#legend_table {
+	background: none;
+}
+
+.legend_thead {
+	font-size: medium;
+	padding: 0 0 5px 5px;
+	display: none;
+	text-shadow: 1px 1px 2px #000;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.legend_pic {
+	padding: 2px 0;
+	text-align: center;
+	cursor: pointer;
+}
+
+.legend_text {
+	padding: 0 10px 0 5px;
+	font-size: 1.2em;
+	display: none;
+	text-shadow: 1px 1px 2px #000;
+	color: rgba(255, 255, 255, 0.9);
+}

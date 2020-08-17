@@ -3,9 +3,10 @@
 	<head>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
 		<meta charset="UTF-8">
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<!--		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css.css">
 		<script type="text/javascript">
 			$(function(){
@@ -219,10 +220,12 @@
 <script type="text/javascript">
 
 	var map = new google.maps.Map(document.getElementById('map'), {
-		center: new google.maps.LatLng(52.5377, 13.4281), //good value for seeing both streets
+		 center: new google.maps.LatLng(52.5377, 13.4281), //good value for seeing both streets
 		//		center: new google.maps.LatLng(52.5400, 13.4129), // Schönhauser Allee 42
+		//		center: new google.maps.LatLng(18.540199, 73.898783), // Liberty Phase 2
+        
 		//		zoom: 17, // (good for one street)
-		zoom: 15, // good for an overview
+		 zoom: 15, // good for an overview
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		//		overviewMapControl: true,
 		overviewMapControl: false,
@@ -256,7 +259,7 @@
 	var importFunction1 = d3.dsv(";","text/csv");
 
 	//  Load the station data. When the data comes back, create an overlay.
-	importFunction1("mobility_night.csv", function(data) {
+	importFunction1("https://covid19.pubport.de/mobility_night.csv", function(data) {
 
 		//  CREATE SCALES FOR DATAPOINTS
 
@@ -417,7 +420,7 @@
 	var importFunction3 = d3.dsv(";","text/csv");
 
 	//  Load the station data. When the data comes back, create an overlay.
-	importFunction3("prenzl_schoen_allee.csv", function(data) {
+	importFunction3("https://covid19.pubport.de/prenzl_schoen_allee.csv", function(data) {
 
 		//  CREATE COLOR SCALE FOR DATAPOINTS
 
